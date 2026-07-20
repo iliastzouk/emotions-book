@@ -1,0 +1,351 @@
+<title>Character Bible — Οι Περιπέτειες των Συναισθημάτων</title>
+<style>
+  @font-face {
+    font-family: 'Comfortaa';
+    font-style: normal; font-weight: 700; font-display: swap;
+    src: local('Comfortaa');
+  }
+
+  :root {
+    --paper: #FBFAFF;
+    --ink: #2E2A47;
+    --ink-soft: #5A5578;
+    --card: #FFFFFF;
+    --line: rgba(46,42,71,0.12);
+    --coral: #E85D42;
+    --coral-soft: #FDE4DD;
+    --yellow: #F4B93C;
+    --yellow-soft: #FDF0D2;
+    --sage: #5AA588;
+    --sage-soft: #E1F1EA;
+    --purple: #7B6FC4;
+    --purple-soft: #EAE6F9;
+    --blue-soft: #E3EEF6;
+  }
+
+  :root[data-theme="dark"] {
+    --paper: #1B1830;
+    --ink: #EDEAFB;
+    --ink-soft: #B6AFD6;
+    --card: #252140;
+    --line: rgba(237,234,251,0.14);
+    --coral-soft: #4A2A26;
+    --yellow-soft: #4A3C1E;
+    --sage-soft: #1E3A30;
+    --purple-soft: #322A54;
+    --blue-soft: #223244;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #1B1830;
+      --ink: #EDEAFB;
+      --ink-soft: #B6AFD6;
+      --card: #252140;
+      --line: rgba(237,234,251,0.14);
+      --coral-soft: #4A2A26;
+      --yellow-soft: #4A3C1E;
+      --sage-soft: #1E3A30;
+      --purple-soft: #322A54;
+      --blue-soft: #223244;
+    }
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Source Sans 3", Verdana, "Segoe UI", Arial, sans-serif;
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 56px 24px 100px;
+    line-height: 1.6;
+  }
+
+  h1.title {
+    font-family: "Comfortaa", "Trebuchet MS", sans-serif;
+    font-weight: 700;
+    color: var(--purple);
+    font-size: clamp(1.7rem, 4vw, 2.3rem);
+    text-align: center;
+    text-wrap: balance;
+    margin: 0 0 6px;
+  }
+  .subtitle {
+    text-align: center;
+    color: var(--ink-soft);
+    font-size: 1rem;
+    margin: 0 0 8px;
+  }
+  .lock-note {
+    text-align: center;
+    font-size: 0.82rem;
+    color: var(--coral);
+    background: var(--coral-soft);
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 20px;
+    margin: 12px auto 48px;
+    font-weight: bold;
+  }
+  .lock-wrap { text-align: center; }
+
+  h2.section-title {
+    font-family: "Comfortaa", "Trebuchet MS", sans-serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: var(--ink);
+    margin: 64px 0 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  h2.section-title::after {
+    content: "";
+    flex: 1;
+    height: 2px;
+    background: var(--line);
+  }
+
+  .char-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 28px 30px;
+    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 26px;
+  }
+  .char-portrait {
+    width: 100px; height: 100px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.6rem;
+    align-self: start;
+  }
+  .char-name {
+    font-family: "Comfortaa", "Trebuchet MS", sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--purple);
+    margin: 0 0 2px;
+  }
+  .char-role { color: var(--ink-soft); font-size: 0.85rem; margin-bottom: 14px; }
+  .attr-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 24px; }
+  .attr-grid.full { grid-template-columns: 1fr; }
+  .attr { font-size: 0.92rem; }
+  .attr dt { font-weight: bold; color: var(--ink); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-soft); margin-bottom: 2px; }
+  .attr dd { margin: 0; }
+  .quote {
+    margin-top: 14px;
+    font-style: italic;
+    color: var(--purple);
+    background: var(--purple-soft);
+    padding: 8px 14px;
+    border-radius: 10px;
+    display: inline-block;
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 640px) {
+    .char-card { grid-template-columns: 1fr; }
+    .char-portrait { width: 64px; height: 64px; font-size: 1.8rem; }
+  }
+
+  .palette-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; }
+  .swatch { border-radius: 12px; padding: 16px; border: 1px solid var(--line); }
+  .swatch .chip { height: 46px; border-radius: 8px; margin-bottom: 10px; }
+  .swatch .name { font-weight: bold; font-size: 0.88rem; }
+  .swatch .hex { font-family: monospace; font-size: 0.8rem; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+  .swatch .use { font-size: 0.78rem; color: var(--ink-soft); margin-top: 4px; }
+
+  .style-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 26px 30px;
+  }
+  .style-card ul { margin: 10px 0 0; padding-left: 20px; }
+  .style-card li { margin-bottom: 8px; }
+
+  .prompt-block {
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 12px;
+    padding: 20px 22px;
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.7;
+    margin-top: 18px;
+    overflow-x: auto;
+  }
+  :root[data-theme="dark"] .prompt-block, .prompt-block { background: #2E2A47; color: #F3F1FB; }
+
+  .friends-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 18px; }
+</style>
+
+<h1 class="title">Character Bible</h1>
+<p class="subtitle">«Οι Περιπέτειες των Συναισθημάτων» — σταθερή ταυτότητα χαρακτήρων, παλέτας και στυλ</p>
+<div class="lock-wrap"><span class="lock-note">🔒 ΕΓΚΕΚΡΙΜΕΝΟ &amp; ΚΛΕΙΔΩΜΕΝΟ — όλο το ξαναγράψιμο, οι δραστηριότητες και τα illustration prompts ακολουθούν αυστηρά αυτό το έγγραφο</span></div>
+
+<h2 class="section-title">Πρωταγωνίστρια</h2>
+
+<div class="char-card">
+  <div class="char-portrait" style="background:var(--yellow-soft);">👧</div>
+  <div>
+    <div class="char-name">Μελίνα</div>
+    <div class="char-role">Πρωταγωνίστρια, 5,5 ετών</div>
+    <dl class="attr-grid">
+      <div class="attr"><dt>Μαλλιά</dt><dd>Καστανά, bob κούρεμα ως τους ώμους, απαλή αφέλεια, ροζ φιόγκος στο πλάι</dd></div>
+      <div class="attr"><dt>Μάτια</dt><dd>Μεγάλα, καστανά, εκφραστικά</dd></div>
+      <div class="attr"><dt>Σωματότυπο</dt><dd>Τυπικές παιδικές αναλογίες picture-book (μεγαλύτερο κεφάλι, μικρό κορμί), ροδαλά μάγουλα, λίγες φακίδες στη μύτη</dd></div>
+      <div class="attr"><dt>Σταθερή ενδυμασία</dt><dd>Τζιν φόρμα με τιράντες πάνω από κίτρινη ριγέ μπλούζα, ροζ sneakers (αλλάζει μόνο για συγκεκριμένες σκηνές: πιτζάμες, μαγιό, παλτό)</dd></div>
+      <div class="attr"><dt>Προσωπικότητα</dt><dd>Περίεργη, γενναία-υπό-εκπαίδευση, λίγο πεισματάρα, πολύ παρατηρητική, μεγάλη φαντασία, νοιάζεται πολύ για τους φίλους της</dd></div>
+      <div class="attr"><dt>Αγαπημένο παιχνίδι</dt><dd>Λούτρινο κουνελάκι ονόματι <strong>Καρότο</strong> — το παίρνει μαζί της συγκεκριμένα στις δύσκολες/τρομακτικές στιγμές (νέο μέρος, γιατρός, σκοτεινό δωμάτιο)· επανερχόμενο αντικείμενο σε πολλά κεφάλαια, όχι one-off αναφορά</dd></div>
+      <div class="attr"><dt>Αγαπημένο χρώμα</dt><dd>Κίτρινο</dd></div>
+      <div class="attr"><dt>Αγαπημένο φαγητό</dt><dd>Παγωτό φράουλα</dd></div>
+      <div class="attr"><dt>Αγαπημένο παιχνίδι (activity)</dt><dd>Κρυφτό</dd></div>
+      <div class="attr"><dt>Συνήθειες</dt><dd>Μετράει στα δάχτυλα όταν σκέφτεται, γέρνει το κεφάλι στο πλάι, συλλέγει βοτσαλάκια, σιγοτραγουδά ανοησίες όταν χαίρεται</dd></div>
+    </dl>
+    <div class="quote">«Χμμμ...» (όταν σκέφτεται) · «Απίστευτο-τεράστιο-φανταστικό!» (όταν ενθουσιάζεται) · «Μπορώ, μπορώ, μπορώ!» (όταν παίρνει κουράγιο)</div>
+  </div>
+</div>
+
+<h2 class="section-title">Κατοικίδιο</h2>
+
+<div class="char-card">
+  <div class="char-portrait" style="background:var(--sage-soft);">🐶</div>
+  <div>
+    <div class="char-name">Μπισκότο</div>
+    <div class="char-role">Κουτάβι της Μελίνας</div>
+    <dl class="attr-grid">
+      <div class="attr"><dt>Εμφάνιση</dt><dd>Μικρός χνουδωτός σκύλος, κρεμ/λευκό τρίχωμα, καφέ αυτιά, μπλε λουρί</dd></div>
+      <div class="attr"><dt>Προσωπικότητα</dt><dd>Πιστός, λίγο αδέξιος, κωμική ανακούφιση, πάντα δίπλα στη Μελίνα</dd></div>
+      <div class="attr"><dt>Συνήθειες</dt><dd>Σκοντάφτει στα πόδια του, κλέβει κάλτσες, θάβει μικρά αντικείμενα στον κήπο, κοιμάται με το ένα αυτί σηκωμένο</dd></div>
+      <div class="attr"><dt>«Γλώσσα»</dt><dd>Μία χαρούμενη γαβγιά όταν ενθουσιάζεται, γρήγορα-γρήγορα γαβγίσματα όταν ανησυχεί για τη Μελίνα</dd></div>
+      <div class="attr full"><dt>Επαναλαμβανόμενη εικόνα (σταθερό μοτίβο)</dt><dd>Όταν η Μελίνα στενοχωριέται, ο Μπισκότο κάθεται πάντα σιωπηλά δίπλα της, χωρίς να την ενοχλεί — απλώς είναι εκεί. Δεν προσπαθεί να «διορθώσει» τη διάθεσή της, απλώς συντροφεύει.</dd></div>
+    </dl>
+  </div>
+</div>
+
+<h2 class="section-title">Οικογένεια</h2>
+
+<div class="char-card">
+  <div class="char-portrait" style="background:var(--blue-soft);">👩</div>
+  <div>
+    <div class="char-name">Μαμά</div>
+    <div class="char-role">Μητέρα της Μελίνας</div>
+    <dl class="attr-grid">
+      <div class="attr"><dt>Εμφάνιση</dt><dd>Καστανά μαλλιά σε αλογοουρά, απαλό λαβανδί/μπλε cardigan</dd></div>
+      <div class="attr"><dt>Προσωπικότητα</dt><dd>Ζεστή, υπομονετική, πάντα επικυρώνει το συναίσθημα πριν βάλει όριο, ήπιο χιούμορ</dd></div>
+    </dl>
+    <div class="quote">«Έλα να το κοιτάξουμε μαζί»</div>
+  </div>
+</div>
+
+<div class="char-card">
+  <div class="char-portrait" style="background:var(--coral-soft);">👨</div>
+  <div>
+    <div class="char-name">Μπαμπάς</div>
+    <div class="char-role">Πατέρας της Μελίνας</div>
+    <dl class="attr-grid">
+      <div class="attr"><dt>Εμφάνιση</dt><dd>Κοντά σγουρά μαλλιά, γυαλιά, καρό πουκάμισο</dd></div>
+      <div class="attr"><dt>Προσωπικότητα</dt><dd>Παιχνιδιάρης, λέει αστεία λογοπαίγνια, ήρεμος στις κρίσεις, της μαθαίνει πρακτικά πράγματα</dd></div>
+    </dl>
+    <div class="quote">«Πάμε αργά-αργά, σαν τη χελώνα»</div>
+  </div>
+</div>
+
+<div class="char-card">
+  <div class="char-portrait" style="background:var(--purple-soft);">👵</div>
+  <div>
+    <div class="char-name">Γιαγιά</div>
+    <div class="char-role">Γιαγιά της Μελίνας</div>
+    <dl class="attr-grid">
+      <div class="attr"><dt>Εμφάνιση</dt><dd>Ασημιά μαλλιά σε κότσο, ποδιά με λουλούδια</dd></div>
+      <div class="attr"><dt>Προσωπικότητα</dt><dd>Μυρίζει πάντα βανίλια, λέει παραμύθια με αστείες φωνές, ατελείωτη υπομονή</dd></div>
+    </dl>
+  </div>
+</div>
+
+<div class="char-card">
+  <div class="char-portrait" style="background:var(--yellow-soft);">👴</div>
+  <div>
+    <div class="char-name">Παππούς</div>
+    <div class="char-role">Παππούς της Μελίνας</div>
+    <dl class="attr-grid">
+      <div class="attr"><dt>Εμφάνιση</dt><dd>Λευκό μουστάκι, καπέλο, καρό γιλέκο</dd></div>
+      <div class="attr"><dt>Προσωπικότητα</dt><dd>Ξέρει ένα τραγούδι για τα πάντα, της μαθαίνει ονόματα πουλιών και φυτών</dd></div>
+    </dl>
+  </div>
+</div>
+
+<div class="style-card" style="margin-bottom:20px;">
+  <div class="char-name" style="margin-bottom:10px;">💛 Αφηγηματική αρχή: οι γονείς δεν είναι τέλειοι</div>
+  <p style="margin:0 0 10px;">Για να μη μοιάζουν «τέλειοι», σε 2-3 κεφάλαια θα εμφανιστεί μια στιγμή όπου ένας γονιός κάνει κάτι όχι-ιδανικό και μετά το διορθώνει — μοντελοποιώντας ότι η επιδιόρθωση μετά από μια ρήξη είναι φυσιολογική, όχι μόνο η τελειότητα:</p>
+  <ul>
+    <li>Η μαμά μιλάει λίγο πιο απότομα σε μια βιαστική πρωινή στιγμή, το προσέχει, ζητάει συγγνώμη και εξηγεί ότι κι οι μεγάλοι νιώθουν έντονα συναισθήματα</li>
+    <li>Ο μπαμπάς ξεχνάει μια υπόσχεση (να παίξουν κάτι) λόγω δουλειάς, η Μελίνα στενοχωριέται, εκείνος το παραδέχεται και βρίσκει χρόνο να το διορθώσει</li>
+    <li>Η μαμά ανεβάζει λίγο τον τόνο της φωνής της σε μια θορυβώδη/χαοτική στιγμή, μετά κάθεται με τη Μελίνα και ζητάει συγγνώμη</li>
+  </ul>
+</div>
+
+<h2 class="section-title">Φίλοι</h2>
+<div class="friends-row">
+  <div class="char-card" style="grid-template-columns: 90px 1fr;">
+    <div class="char-portrait" style="background:var(--coral-soft); width:70px; height:70px; font-size:1.8rem;">👧</div>
+    <div>
+      <div class="char-name" style="font-size:1.05rem;">Σοφία</div>
+      <div class="char-role">Καλύτερη φίλη, ίδια ηλικία</div>
+      <div class="attr">Σγουρά κόκκινα μαλλιά, λατρεύει τη ζωγραφική, λίγο ντροπαλή στην αρχή αλλά πολύ πιστή φίλη</div>
+    </div>
+  </div>
+  <div class="char-card" style="grid-template-columns: 90px 1fr;">
+    <div class="char-portrait" style="background:var(--sage-soft); width:70px; height:70px; font-size:1.8rem;">👦</div>
+    <div>
+      <div class="char-name" style="font-size:1.05rem;">Νίκος</div>
+      <div class="char-role">Ξάδερφος, 6 ετών</div>
+      <div class="attr">Ενεργητικός, λατρεύει τα επιτραπέζια, λίγο ανταγωνιστικός αλλά πολύ καλόκαρδος</div>
+    </div>
+  </div>
+  <div class="char-card" style="grid-template-columns: 90px 1fr;">
+    <div class="char-portrait" style="background:var(--blue-soft); width:70px; height:70px; font-size:1.8rem;">🧑</div>
+    <div>
+      <div class="char-name" style="font-size:1.05rem;">Λεωνίδας</div>
+      <div class="char-role">Γείτονας, 5 ετών (νέος χαρακτήρας)</div>
+      <div class="attr">Ήσυχος, λατρεύει έντομα και φύση, γίνεται φίλος της Μελίνας μέσα από κοινά ενδιαφέροντα</div>
+    </div>
+  </div>
+</div>
+
+<h2 class="section-title">Παλέτα χρωμάτων εικονογράφησης</h2>
+<div class="palette-grid">
+  <div class="swatch" style="background:var(--purple-soft);"><div class="chip" style="background:#7B6FC4;"></div><div class="name">Λεβάντα μοβ</div><div class="hex">#7B6FC4</div><div class="use">Ουρανός, βραδινές σκηνές, τίτλοι</div></div>
+  <div class="swatch" style="background:var(--coral-soft);"><div class="chip" style="background:#E85D42;"></div><div class="name">Κοραλί</div><div class="hex">#E85D42</div><div class="use">Ζεστασιά, ενέργεια, ρούχα Μελίνας</div></div>
+  <div class="swatch" style="background:var(--yellow-soft);"><div class="chip" style="background:#F4B93C;"></div><div class="name">Ηλιόχρωμο κίτρινο</div><div class="hex">#F4B93C</div><div class="use">Αγαπημένο χρώμα Μελίνας, φως</div></div>
+  <div class="swatch" style="background:var(--sage-soft);"><div class="chip" style="background:#5AA588;"></div><div class="name">Φασκόμηλο πράσινο</div><div class="hex">#5AA588</div><div class="use">Φύση, ηρεμία, γρασίδι</div></div>
+  <div class="swatch" style="background:var(--blue-soft);"><div class="chip" style="background:#4E85B8;"></div><div class="name">Απαλό μπλε</div><div class="hex">#4E85B8</div><div class="use">Ρούχα Μαμάς, νερό, ουρανός ημέρας</div></div>
+  <div class="swatch" style="background:#F3F1FB;"><div class="chip" style="background:#2E2A47;"></div><div class="name">Βαθύ μελανί</div><div class="hex">#2E2A47</div><div class="use">Περιγράμματα, κείμενο</div></div>
+</div>
+
+<h2 class="section-title">Στυλ εικονογράφησης</h2>
+<div class="style-card">
+  <p>Ζεστό, παιδικό εικονογραφικό στυλ, ποιότητας αντίστοιχης με σύγχρονα ελληνικά εικονογραφημένα βιβλία (π.χ. εκδόσεις Ψυχογιός) ή την Upbility — <strong>όχι</strong> φωτορεαλιστικό, <strong>όχι</strong> anime.</p>
+  <ul>
+    <li>Απαλά, στρογγυλεμένα σχήματα — καθόλου αιχμηρές γωνίες</li>
+    <li>Καθαρό, σχετικά χοντρό περίγραμμα σε βαθύ μελανί (#2E2A47)</li>
+    <li>Μεγάλα, εκφραστικά μάτια· απλοποιημένες αλλά ζωντανές εκφράσεις προσώπου</li>
+    <li>Υφή watercolor/gouache με ψηφιακό φινίρισμα — όχι επίπεδο vector, όχι φωτορεαλισμός</li>
+    <li>Παιδικές αναλογίες (μεγαλύτερο κεφάλι, μικρό κορμί), ζεστό, απαλό φωτισμό</li>
+    <li>Παλέτα σταθερά μέσα στα παραπάνω 6 χρώματα + ουδέτερα κρεμ/λευκά</li>
+    <li>Ίδιοι χαρακτήρες (ίδια ρούχα/χρώματα) σε κάθε εικόνα όπου εμφανίζονται</li>
+  </ul>
+  <div class="prompt-block">
+    BASE STYLE TAG (θα μπει σε κάθε illustration prompt):<br>
+    "warm children's picture-book illustration, soft rounded shapes, thick clean linework in deep indigo, gouache/watercolor digital texture, big expressive eyes, pastel palette (lavender #7B6FC4, coral #E85D42, sunny yellow #F4B93C, sage green #5AA588, soft blue #4E85B8), toddler-book proportions, warm soft lighting, no photorealism, no anime style"<br><br>
+    CONSISTENCY CLAUSE (θα μπει σε κάθε prompt, μετά τη σκηνική περιγραφή):<br>
+    "Maintain exact character consistency across every illustration: the same face, hairstyle, proportions and clothing for Melina, Biscuit and every recurring character throughout the entire book — reference sheet: Melina = bob haircut, pink side bow, denim overall + yellow striped shirt, pink sneakers; Biscuit = small cream fluffy puppy, brown ears, blue collar"
+  </div>
+</div>

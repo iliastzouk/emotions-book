@@ -1,0 +1,847 @@
+<title>Illustration Bible v2 — Οι Περιπέτειες των Συναισθημάτων</title>
+<style>
+  :root {
+    --paper: #FBFAFF; --ink: #2E2A47; --ink-soft: #5A5578;
+    --card: #FFFFFF; --line: rgba(46,42,71,0.14);
+    --coral: #E85D42; --coral-soft: #FDE4DD;
+    --yellow: #F4B93C; --yellow-soft: #FDF0D2;
+    --sage: #5AA588; --sage-soft: #E1F1EA;
+    --purple: #7B6FC4; --purple-soft: #EAE6F9;
+    --blue-soft: #E3EEF6;
+  }
+  :root[data-theme="dark"] {
+    --paper: #1B1830; --ink: #EDEAFB; --ink-soft: #B6AFD6;
+    --card: #252140; --line: rgba(237,234,251,0.14);
+    --coral-soft: #4A2A26; --yellow-soft: #4A3C1E; --sage-soft: #1E3A30; --purple-soft: #322A54; --blue-soft: #223244;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #1B1830; --ink: #EDEAFB; --ink-soft: #B6AFD6;
+      --card: #252140; --line: rgba(237,234,251,0.14);
+      --coral-soft: #4A2A26; --yellow-soft: #4A3C1E; --sage-soft: #1E3A30; --purple-soft: #322A54; --blue-soft: #223244;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--paper); color: var(--ink);
+    font-family: "Source Sans 3", Verdana, "Segoe UI", Arial, sans-serif;
+    max-width: 920px; margin: 0 auto; padding: 56px 24px 100px; line-height: 1.6;
+  }
+  h1.title {
+    font-family: "Comfortaa", "Trebuchet MS", sans-serif; font-weight: 700;
+    color: var(--purple); font-size: clamp(1.6rem, 4vw, 2.1rem); text-align: center; text-wrap: balance; margin: 0 0 6px;
+  }
+  .subtitle { text-align: center; color: var(--ink-soft); font-size: 1rem; margin: 0 0 10px; }
+  .lock-note {
+    display: block; text-align: center; font-size: 0.8rem; color: var(--sage);
+    background: var(--sage-soft); width: fit-content; margin: 0 auto 12px; padding: 6px 16px; border-radius: 20px; font-weight: bold;
+  }
+  .count-note {
+    display: block; text-align: center; font-size: 0.85rem; color: var(--purple);
+    background: var(--purple-soft); width: fit-content; margin: 0 auto 36px; padding: 6px 16px; border-radius: 20px; font-weight: bold;
+  }
+
+  h2.section-h {
+    font-family: "Comfortaa", "Trebuchet MS", sans-serif; font-weight: 700; font-size: 1.3rem; color: var(--ink);
+    margin: 56px 0 8px; display: flex; align-items: center; gap: 12px;
+  }
+  h2.section-h::after { content: ""; flex: 1; height: 2px; background: var(--line); }
+  .section-sub { color: var(--ink-soft); font-size: 0.88rem; margin: 0 0 24px; }
+
+  .base-card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 22px 26px; margin-bottom: 24px;
+  }
+  .base-card h3 { font-family: "Comfortaa", "Trebuchet MS", sans-serif; font-size: 1.05rem; margin: 0 0 12px; color: var(--purple); }
+  .base-block {
+    background: var(--ink); color: #F3F1FB; border-radius: 10px; padding: 14px 18px;
+    font-family: monospace; font-size: 0.82rem; line-height: 1.65; margin-bottom: 10px; overflow-x: auto; white-space: pre-wrap;
+  }
+  .base-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-soft); margin: 14px 0 4px; font-weight: bold; }
+
+  .toc { columns: 3; gap: 20px; margin-bottom: 20px; font-size: 0.8rem; }
+  .toc a { color: var(--ink); text-decoration: none; display: block; padding: 2px 0; }
+  .toc a:hover { color: var(--purple); }
+
+  .img-card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 22px 26px; margin-bottom: 20px; scroll-margin-top: 20px;
+  }
+  .img-head { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
+  .img-id { font-family: "Comfortaa", "Trebuchet MS", sans-serif; font-weight: 700; font-size: 1.1rem; color: var(--coral); }
+  .tag {
+    font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.04em;
+    padding: 3px 9px; border-radius: 12px; font-weight: bold;
+  }
+  .tag.size { background: var(--purple-soft); color: var(--purple); }
+  .tag.prio-HIGH { background: var(--coral-soft); color: var(--coral); }
+  .tag.prio-MEDIUM { background: var(--yellow-soft); color: #8a6d1a; }
+  .tag.prio-LOW { background: var(--sage-soft); color: var(--sage); }
+  .img-page { font-size: 0.82rem; color: var(--ink-soft); margin-left: auto; }
+
+  .meta-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr)); gap: 6px 18px; margin-bottom: 12px; font-size: 0.83rem; }
+  .meta-grid dt { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-soft); }
+  .meta-grid dd { margin: 0; }
+
+  .desc { font-size: 0.88rem; margin-bottom: 12px; }
+  .prompt-block {
+    background: var(--ink); color: #F3F1FB; border-radius: 10px; padding: 11px 15px;
+    font-family: monospace; font-size: 0.78rem; line-height: 1.55; margin-bottom: 8px; overflow-x: auto; white-space: pre-wrap;
+  }
+  .field-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-soft); font-weight: bold; margin: 8px 0 4px; }
+
+  .asset-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap: 14px; margin-bottom: 8px; }
+  .asset-card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px;
+  }
+  .asset-head { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+  .asset-id { font-family: monospace; font-weight: bold; color: var(--coral); font-size: 0.85rem; }
+  .asset-name { font-weight: bold; font-size: 0.9rem; }
+  .asset-prompt {
+    font-family: monospace; font-size: 0.72rem; color: var(--ink-soft); line-height: 1.5;
+    background: var(--paper); border: 1px dashed var(--line); border-radius: 8px; padding: 8px 10px; margin-top: 6px;
+  }
+  .cat-group { margin-bottom: 28px; }
+  .cat-title { font-weight: bold; font-size: 0.95rem; color: var(--purple); margin-bottom: 10px; }
+</style>
+
+<h1 class="title">Illustration Bible v2</h1>
+<p class="subtitle">«Οι Περιπέτειες των Συναισθημάτων» — πλήρες πακέτο παραγωγής εικόνων</p>
+<span class="lock-note">🔒 Manuscript κλειδωμένο μετά από editorial QA — οι σελίδες εδώ είναι οριστικές</span>
+<span class="count-note">26 σκηνές (Full/Half/Spot) + 39 reusable assets = 65 εικόνες συνολικά</span>
+
+<div class="base-card">
+  <h3>Base style (μπαίνει σε ΚΑΘΕ prompt)</h3>
+  <div class="base-label">Style tag</div>
+  <div class="base-block">warm children's picture-book illustration in a simple FLAT storybook style (NOT semi-realistic, NOT glossy editorial illustration, NOT detailed digital painting, NOT textured/grainy illustration, NO paper or canvas grain texture) — soft rounded shapes, thick clean uniform linework in deep indigo (#2E2A47, NOT black), flat single-tone gouache/watercolor color fills with minimal to no shading (no fabric folds, no directional gradients), big expressive eyes, pastel palette (lavender #7B6FC4, coral #E85D42, sunny yellow #F4B93C, sage green #5AA588, soft blue #4E85B8), simple toddler-book proportions, warm soft flat lighting, no photorealism, no anime style, no semi-realistic rendering, no gradient shading, no jewelry, no detailed fabric texture</div>
+  <div class="base-label">Consistency clause</div>
+  <div class="base-block">Maintain exact character consistency across every illustration: same face, hairstyle, proportions and clothing for every recurring character throughout the entire book.
+Melina = 5.5-year-old girl, brown bob haircut with soft front fringe, pink bow on the side, big brown eyes, light freckles across the nose, denim overall dungarees over a yellow-and-white striped shirt, pink sneakers.
+Biscuit = small cream/white fluffy puppy, floppy brown ears, blue collar.
+Mom = brown hair in a ponytail, soft lavender cardigan.
+Dad = short curly hair, glasses, plaid shirt.
+Grandma = silver hair in a bun, floral-print apron.
+Grandpa = white moustache, brimmed hat, plaid vest.
+Sofia = curly red hair, girl, same age as Melina.
+Nikos = energetic boy, about 6 years old.
+Leonidas = quiet boy, about 5 years old, neighbor.</div>
+  <div class="base-label">Negative prompt (μπαίνει σε ΚΑΘΕ εικόνα)</div>
+  <div class="base-block">photorealism, semi-realistic rendering, glossy/detailed digital painting, paper grain, canvas texture, crayon texture, anime/manga style, scary or dark imagery, text or letters in image, extra limbs or distorted hands/faces, exaggerated adult body proportions, jewelry, detailed fabric texture, fabric folds, heavy gradient shading, blurry, logos or watermarks, violence, clinical or medical imagery</div>
+  <p style="font-size:0.85rem; color:var(--ink-soft); margin:10px 0 0;">
+    <strong>Μεγέθη:</strong> Full page (3:4, ολοσέλιδη) · Half page (4:3, μοιράζεται με κείμενο) · Spot (4:3, μικρή)<br>
+    <strong>Priority:</strong> <span class="tag prio-HIGH">HIGH</span> = απαραίτητη πρώτα · <span class="tag prio-MEDIUM">MEDIUM</span> = σημαντική · <span class="tag prio-LOW">LOW</span> = προαιρετική/διακοσμητική, μπορεί να μπει τελευταία ή να παραλειφθεί αν λείψει χρόνος
+  </p>
+</div>
+
+<h2 class="section-h">Σκηνές (26)</h2>
+<p class="section-sub">Μοναδικές, αφηγηματικές εικόνες δεμένες με συγκεκριμένη σελίδα του βιβλίου.</p>
+
+<div class="toc">
+  <a href="#I-001">I-001 — σελ.i</a>
+  <a href="#I-002">I-002 — σελ.1</a>
+  <a href="#I-003">I-003 — σελ.8</a>
+  <a href="#I-004">I-004 — σελ.11</a>
+  <a href="#I-005">I-005 — σελ.15</a>
+  <a href="#I-006">I-006 — σελ.19</a>
+  <a href="#I-007">I-007 — σελ.21</a>
+  <a href="#I-008">I-008 — σελ.27</a>
+  <a href="#I-009">I-009 — σελ.32</a>
+  <a href="#I-010">I-010 — σελ.38</a>
+  <a href="#I-011">I-011 — σελ.39</a>
+  <a href="#I-012">I-012 — σελ.43</a>
+  <a href="#I-013">I-013 — σελ.47</a>
+  <a href="#I-014">I-014 — σελ.55</a>
+  <a href="#I-015">I-015 — σελ.63</a>
+  <a href="#I-016">I-016 — σελ.70</a>
+  <a href="#I-017">I-017 — σελ.74</a>
+  <a href="#I-018">I-018 — σελ.77</a>
+  <a href="#I-019">I-019 — σελ.85</a>
+  <a href="#I-020">I-020 — σελ.93</a>
+  <a href="#I-021">I-021 — σελ.101</a>
+  <a href="#I-022">I-022 — σελ.109</a>
+  <a href="#I-023">I-023 — σελ.116</a>
+  <a href="#I-024">I-024 — σελ.123</a>
+  <a href="#I-025">I-025 — σελ.130</a>
+  <a href="#I-026">I-026 — σελ.134</a>
+</div>
+
+<div class="img-card" id="I-001">
+  <div class="img-head">
+    <span class="img-id">I-001</span>
+    <span class="tag size">Full page</span>
+    <span class="tag prio-HIGH">HIGH</span>
+    <span class="img-page">Σελίδα i</span>
+  </div>
+  <dl class="meta-grid">
+    <div><dt>Χαρακτήρες</dt><dd>Μελίνα, Μπισκότο</dd></div>
+    <div><dt>Συναίσθημα</dt><dd>Ζεστασιά, χαρά, οικειότητα</dd></div>
+    <div><dt>Camera</dt><dd>Eye level, medium shot</dd></div>
+    <div><dt>Aspect ratio</dt><dd>3:4</dd></div>
+  </dl>
+  <div class="desc"><strong>Palette:</strong> Dominant: 🟡 yellow · Secondary: 🟣 lavender · Accent: 🩷 coral</div>
+  <div class="desc"><strong>Περιγραφή:</strong> Εξώφυλλο: Η Μελίνα καθισμένη στο χαλί του δωματίου της, αγκαλιά με τον Μπισκότο, γύρω τους ανοιχτά βιβλία και μολύβια, ζεστό απογευματινό φως.</div>
+  <div class="field-label">Prompt (πρόσθεσε πριν το base style + consistency clause από πάνω)</div>
+  <div class="prompt-block">Book cover illustration. Melina sitting cross-legged on a rug in her bedroom, hugging Biscuit the puppy, surrounded by open picture books and colored pencils, warm afternoon light through a window, cozy bedroom with a bookshelf and a small plant, joyful and safe atmosphere.</div>
+  <div class="field-label">Safe area</div>
+  <div class="desc">Keep Melina and Biscuit centered in the lower two-thirds; leave open sky/wall space in the upper third for title text overlay.</div>
+</div>
+<div class="img-card" id="I-002">
+  <div class="img-head">
+    <span class="img-id">I-002</span>
+    <span class="tag size">Spot illustration</span>
+    <span class="tag prio-HIGH">HIGH</span>
+    <span class="img-page">Σελίδα 1</span>
+  </div>
+  <dl class="meta-grid">
+    <div><dt>Χαρακτήρες</dt><dd>Μελίνα, Μπισκότο</dd></div>
+    <div><dt>Συναίσθημα</dt><dd>Χαρά</dd></div>
+    <div><dt>Camera</dt><dd>Wide shot, three-quarter angle</dd></div>
+    <div><dt>Aspect ratio</dt><dd>4:3</dd></div>
+  </dl>
+  <div class="desc"><strong>Palette:</strong> Dominant: 🟡 yellow · Secondary: 🩷 coral · Accent: 🟢 sage</div>
+  <div class="desc"><strong>Περιγραφή:</strong> Η Μελίνα χοροπηδά με ανοιχτά χέρια μπροστά από έναν ψηλό πύργο τουβλάκια, ο Μπισκότο πηδά χαρούμενος δίπλα της, ζεστό ηλιόλουστο δωμάτιο.</div>
+  <div class="field-label">Prompt (πρόσθεσε πριν το base style + consistency clause από πάνω)</div>
+  <div class="prompt-block">Melina jumping joyfully with arms wide open in front of a tall block tower she just built, Biscuit the puppy jumping happily beside her with tongue out, sunny living room, warm golden light, sense of triumphant celebration.</div>
+  <div class="field-label">Safe area</div>
+  <div class="desc">Keep the tower and both characters within the central safe area; avoid cropping Melina's raised arms at the frame edge.</div>
+</div>
+<div class="img-card" id="I-003">
+  <div class="img-head">
+    <span class="img-id">I-003</span>
+    <span class="tag size">Spot illustration</span>
+    <span class="tag prio-HIGH">HIGH</span>
+    <span class="img-page">Σελίδα 8</span>
+  </div>
+  <dl class="meta-grid">
+    <div><dt>Χαρακτήρες</dt><dd>Μελίνα, Μπισκότο</dd></div>
+    <div><dt>Συναίσθημα</dt><dd>Λύπη</dd></div>
+    <div><dt>Camera</dt><dd>Close-up, eye level</dd></div>
+    <div><dt>Aspect ratio</dt><dd>4:3</dd></div>
+  </dl>
+  <div class="desc"><strong>Palette:</strong> Dominant: 🔵 soft blue · Secondary: 🟣 lavender · Accent: 🟡 yellow</div>
+  <div class="desc"><strong>Περιγραφή:</strong> Η Μελίνα κάθεται στο πάτωμα με σκυμμένο κεφάλι, κρατώντας ένα σκισμένο ζωγραφισμένο χαρτί με ουράνιο τόξο, ο Μπισκότο ακουμπά το κεφάλι του στο γόνατό της με ένοχο βλέμμα.</div>
+  <div class="field-label">Prompt (πρόσθεσε πριν το base style + consistency clause από πάνω)</div>
+  <div class="prompt-block">Melina sitting on the floor with her head down, holding a torn hand-drawn rainbow picture in both hands, small tears, Biscuit the puppy resting his head gently on her knee with a guilty, apologetic expression, soft muted afternoon light, tender and quiet mood.</div>
+  <div class="field-label">Safe area</div>
+  <div class="desc">Keep the torn paper visible and readable as a rainbow drawing; keep both faces unobscured within central frame.</div>
+</div>
+<div class="img-card" id="I-004">
+  <div class="img-head">
+    <span class="img-id">I-004</span>
+    <span class="tag size">Half page</span>
+    <span class="tag prio-MEDIUM">MEDIUM</span>
+    <span class="img-page">Σελίδα 11</span>
+  </div>
+  <dl class="meta-grid">
+    <div><dt>Χαρακτήρες</dt><dd>Μελίνα, Μαμά, Μπισκότο</dd></div>
+    <div><dt>Συναίσθημα</dt><dd>Παρηγοριά, ανακούφιση</dd></div>
+    <div><dt>Camera</dt><dd>Wide shot, eye level</dd></div>
+    <div><dt>Aspect ratio</dt><dd>4:3</dd></div>
+  </dl>
+  <div class="desc"><strong>Palette:</strong> Dominant: 🟣 lavender · Secondary: 🔵 soft blue · Accent: 🟡 yellow</div>
+  <div class="desc"><strong>Περιγραφή:</strong> Η Μελίνα, η μαμά και ο Μπισκότο αγκαλιασμένοι στο πάτωμα δίπλα στα δύο κομμάτια του σκισμένου σχεδίου, ζεστό φως.</div>
+  <div class="field-label">Prompt (πρόσθεσε πριν το base style + consistency clause από πάνω)</div>
+  <div class="prompt-block">Melina, her mom, and Biscuit the puppy sitting together on the floor in a gentle group hug, the two torn pieces of the rainbow drawing resting nearby, warm soft lamp light, calm and comforting mood, mom's ponytail and lavender cardigan visible.</div>
+  <div class="field-label">Safe area</div>
+  <div class="desc">Keep the hug group centered; leave breathing room above heads for the page's question text that sits directly above this image.</div>
+</div>
+<div class="img-card" id="I-005">
+  <div class="img-head">
+    <span class="img-id">I-005</span>
+    <span class="tag size">Spot illustration</span>
+    <span class="tag prio-HIGH">HIGH</span>
+    <span class="img-page">Σελίδα 15</span>
+  </div>
+  <dl class="meta-grid">
+    <div><dt>Χαρακτήρες</dt><dd>Μελίνα, Νίκος, Μπισκότο</dd></div>
+    <div><dt>Συναίσθημα</dt><dd>Θυμός</dd></div>
+    <div><dt>Camera</dt><dd>Eye level, medium shot</dd></div>
+    <div><dt>Aspect ratio</dt><dd>4:3</dd></div>
+  </dl>
+  <div class="desc"><strong>Palette:</strong> Dominant: 🔴 coral-red · Secondary: 🟡 yellow · Accent: 🟢 sage</div>
+  <div class="desc"><strong>Περιγραφή:</strong> Η Μελίνα στέκεται με σφιγμένες γροθιές και κόκκινα μάγουλα, μπροστά της ο Νίκος κρατά το αρκουδάκι της, ο Μπισκότο κοιτά ανήσυχος.</div>
+  <div class="field-label">Prompt (πρόσθεσε πριν το base style + consistency clause από πάνω)</div>
+  <div class="prompt-block">Melina standing with clenched fists and flushed red cheeks, an angry but not scary expression, facing Nikos (energetic 6-year-old boy) who holds her teddy bear, Biscuit the puppy watching anxiously from the side, living room setting, tense but safe family moment.</div>
+  <div class="field-label">Safe area</div>
+  <div class="desc">Keep both children's faces and the teddy bear clearly visible within the central frame.</div>
+</div>
+<div class="img-card" id="I-006">
+  <div class="img-head">
+    <span class="img-id">I-006</span>
+    <span class="tag size">Spot illustration</span>
+    <span class="tag prio-LOW">LOW</span>
+    <span class="img-page">Σελίδα 19</span>
+  </div>
+  <dl class="meta-grid">
+    <div><dt>Χαρακτήρες</dt><dd>Μελίνα, Μπισκότο</dd></div>
+    <div><dt>Συναίσθημα</dt><dd>Παιχνιδιάρικη συγκέντρωση</dd></div>
+    <div><dt>Camera</dt><dd>Top-down, wide shot</dd></div>
+    <div><dt>Aspect ratio</dt><dd>4:3</dd></div>
+  </dl>
+  <div class="desc"><strong>Palette:</strong> Dominant: 🟢 sage · Secondary: 🟣 lavender · Accent: 🟡 yellow</div>
+  <div class="desc"><strong>Περιγραφή:</strong> Η Μελίνα και ο Μπισκότο παίζουν επιτραπέζιο πάνω σε ένα χαλί, ζάρι στη μέση, χαμογελαστοί.</div>
+  <div class="field-label">Prompt (πρόσθεσε πριν το base style + consistency clause από πάνω)</div>
+  <div class="prompt-block">Top-down view of Melina and Biscuit the puppy playing a small board game on a living room rug, a die in the middle, both smiling, warm cozy afternoon light.</div>
+  <div class="field-label">Safe area</div>
+  <div class="desc">Keep the board game board and both characters within frame, slight vignette at edges is fine.</div>
+</div>
+<div class="img-card" id="I-007">
+  <div class="img-head">
+    <span class="img-id">I-007</span>
+    <span class="tag size">Spot illustration</span>
+    <span class="tag prio-HIGH">HIGH</span>
+    <span class="img-page">Σελίδα 21</span>
+  </div>
+  <dl class="meta-grid">
+    <div><dt>Χαρακτήρες</dt><dd>Μελίνα, Μπαμπάς</dd></div>
+    <div><dt>Συναίσθημα</dt><dd>Φόβος</dd></div>
+    <div><dt>Camera</dt><dd>Eye level, medium shot</dd></div>
+    <div><dt>Aspect ratio</dt><dd>4:3</dd></div>
+  </dl>
+  <div class="desc"><strong>Palette:</strong> Dominant: 🟣 lavender · Secondary: 🔵 soft blue · Accent: 🟡 yellow</div>
+  <div class="desc"><strong>Περιγραφή:</strong> Η Μελίνα στέκεται στην άκρη της πισίνας, κρατώντας σφιχτά το χέρι του μπαμπά, κοιτάζοντας διστακτικά το νερό, δίπλα της τυλιγμένο σε πετσέτα το κουνελάκι Καρότο.</div>
+  <div class="field-label">Prompt (πρόσθεσε πριν το base style + consistency clause από πάνω)</div>
+  <div class="prompt-block">Melina standing at the edge of a swimming pool, gripping her dad's hand tightly, looking hesitantly at the blue water, a plush bunny (Carrot) wrapped in a towel beside her on a pool chair, dad kneeling beside her with glasses and a plaid shirt, bright outdoor pool setting, nervous but supported mood.</div>
+  <div class="field-label">Safe area</div>
+  <div class="desc">Keep the pool edge line roughly at the lower third; keep Melina and dad's joined hands unobscured in the center.</div>
+</div>
+<div class="img-card" id="I-008">
+  <div class="img-head">
+    <span class="img-id">I-008</span>
+    <span class="tag size">Spot illustration</span>
+    <span class="tag prio-MEDIUM">MEDIUM</span>
+    <span class="img-page">Σελίδα 27</span>
+  </div>
+  <dl class="meta-grid">
+    <div><dt>Χαρακτήρες</dt><dd>Μελίνα, Σοφία, Νίκος, Λεωνίδας, Μπισκότο</dd></div>
+    <div><dt>Συναίσθημα</dt><dd>Έκπληξη</dd></div>
+    <div><dt>Camera</dt><dd>Wide shot, eye level</dd></div>
+    <div><dt>Aspect ratio</dt><dd>4:3</dd></div>
+  </dl>
+  <div class="desc"><strong>Palette:</strong> Dominant: 🟠 orange · Secondary: 🩷 coral · Accent: 🟡 yellow</div>
+  <div class="desc"><strong>Περιγραφή:</strong> Η Μελίνα με ορθάνοιχτα μάτια και ανοιχτό στόμα, μπροστά της φίλοι κρατούν μια τούρτα με κεράκια, ο Μπισκότο φοράει στραβό καπελάκι πάρτι.</div>
+  <div class="field-label">Prompt (πρόσθεσε πριν το base style + consistency clause από πάνω)</div>
+  <div class="prompt-block">Melina with wide-open eyes and an open-mouth surprised expression, facing a small group of friends (a curly-red-haired girl, an energetic boy, a quiet boy) holding up a birthday cake with lit candles, Biscuit the puppy wearing a crooked party hat, colorful balloons in the background, joyful surprise-party mood.</div>
+  <div class="field-label">Safe area</div>
+  <div class="desc">Keep Melina's surprised face and the cake both within frame; balloons can bleed off the top edge.</div>
+</div>
+<div class="img-card" id="I-009">
+  <div class="img-head">
+    <span class="img-id">I-009</span>
+    <span class="tag size">Spot illustration</span>
+    <span class="tag prio-HIGH">HIGH</span>
+    <span class="img-page">Σελίδα 32</span>
+  </div>
+  <dl class="meta-grid">
+    <div><dt>Χαρακτήρες</dt><dd>Μελίνα, Μπισκότο</dd></div>
+    <div><dt>Συναίσθημα</dt><dd>Ηρεμία</dd></div>
+    <div><dt>Camera</dt><dd>Eye level, close-up</dd></div>
+    <div><dt>Aspect ratio</dt><dd>4:3</dd></div>
+  </dl>
+  <div class="desc"><strong>Palette:</strong> Dominant: 🟢 sage · Secondary: 🟣 lavender · Accent: 🟡 yellow (lamp glow)</div>
+  <div class="desc"><strong>Περιγραφή:</strong> Η Μελίνα καθισμένη στο κρεβάτι της με μια κουβέρτα, διαβάζει ένα βιβλίο, ο Μπισκότο κοιμάται κουλουριασμένος δίπλα της, απαλό φως βραδινού.</div>
+  <div class="field-label">Prompt (πρόσθεσε πριν το base style + consistency clause από πάνω)</div>
+  <div class="prompt-block">Melina sitting on her bed wrapped in a soft blanket, reading a picture book, Biscuit the puppy curled up asleep beside her, warm dim evening lamp light, peaceful bedtime mood, cozy bedroom with a small nightlight.</div>
+  <div class="field-label">Safe area</div>
+  <div class="desc">Keep the bed and both characters centered; soft vignette toward edges is fine for this calm scene.</div>
+</div>
+<div class="img-card" id="I-010">
+  <div class="img-head">
+    <span class="img-id">I-010</span>
+    <span class="tag size">Full page</span>
+    <span class="tag prio-HIGH">HIGH</span>
+    <span class="img-page">Σελίδα 38</span>
+  </div>
+  <dl class="meta-grid">
+    <div><dt>Χαρακτήρες</dt><dd>Μελίνα, Μπισκότο</dd></div>
+    <div><dt>Συναίσθημα</dt><dd>Χαρά (πριν την υπερφόρτωση)</dd></div>
+    <div><dt>Camera</dt><dd>Wide shot, three-quarter angle</dd></div>
+    <div><dt>Aspect ratio</dt><dd>3:4</dd></div>
+  </dl>
+  <div class="desc"><strong>Palette:</strong> Dominant: 🟡 yellow · Secondary: 🟢 sage · Accent: 🩷 coral</div>
+  <div class="desc"><strong>Περιγραφή:</strong> Η Μελίνα και ο Μπισκότο τρέχουν χαρούμενοι προς την τσουλήθρα, ζωντανή παιδική χαρά με πολλά παιδιά στο βάθος, ζεστά χρώματα.</div>
+  <div class="field-label">Prompt (πρόσθεσε πριν το base style + consistency clause από πάνω)</div>
+  <div class="prompt-block">Melina and Biscuit the puppy running happily toward a slide in a lively, colorful playground, several children playing in the background on swings and a roundabout, bright sunny day, cheerful and energetic mood.</div>
+  <div class="field-label">Safe area</div>
+  <div class="desc">Keep Melina and Biscuit in sharp focus in the foreground center-left; background children can be looser/smaller.</div>
+</div>
+<div class="img-card" id="I-011">
+  <div class="img-head">
+    <span class="img-id">I-011</span>
+    <span class="tag size">Half page</span>
+    <span class="tag prio-MEDIUM">MEDIUM</span>
+    <span class="img-page">Σελίδα 39</span>
+  </div>
+  <dl class="meta-grid">
+    <div><dt>Χαρακτήρες</dt><dd>Μελίνα, Μπισκότο</dd></div>
+    <div><dt>Συναίσθημα</dt><dd>Αισθητηριακή κόπωση</dd></div>
+    <div><dt>Camera</dt><dd>Eye level, medium shot</dd></div>
+    <div><dt>Aspect ratio</dt><dd>4:3</dd></div>
+  </dl>
+  <div class="desc"><strong>Palette:</strong> Dominant: 🟣 lavender · Secondary: 🔵 soft blue · Accent: 🟡 yellow</div>
+  <div class="desc"><strong>Περιγραφή:</strong> Η Μελίνα στέκεται πιο σιωπηλή ανάμεσα σε παιδιά που παίζουν, κοιτάζει γύρω της, ο Μπισκότο δίπλα της με στοργικό βλέμμα.</div>
+  <div class="field-label">Prompt (πρόσθεσε πριν το base style + consistency clause από πάνω)</div>
+  <div class="prompt-block">Melina standing very still and quiet among other children playing energetically around her, slightly overwhelmed expression, looking around, Biscuit the puppy pressed gently against her leg looking up with a caring expression, busy playground background slightly blurred to suggest sensory overload, empathetic mood.</div>
+  <div class="field-label">Safe area</div>
+  <div class="desc">Keep Melina's face clearly readable in the center; background children can be softly blurred toward the edges.</div>
+</div>
+<div class="img-card" id="I-012">
+  <div class="img-head">
+    <span class="img-id">I-012</span>
+    <span class="tag size">Spot illustration</span>
+    <span class="tag prio-LOW">LOW</span>
+    <span class="img-page">Σελίδα 43</span>
+  </div>
+  <dl class="meta-grid">
+    <div><dt>Χαρακτήρες</dt><dd>Μελίνα, Μπισκότο</dd></div>
+    <div><dt>Συναίσθημα</dt><dd>Μετάβαση θορύβου→ηρεμίας</dd></div>
+    <div><dt>Camera</dt><dd>Wide shot, top-down</dd></div>
+    <div><dt>Aspect ratio</dt><dd>4:3</dd></div>
+  </dl>
+  <div class="desc"><strong>Palette:</strong> Dominant: 🟣 lavender · Secondary: 🟢 sage · Accent: 🩷 coral</div>
+  <div class="desc"><strong>Περιγραφή:</strong> Μικρή εικόνα της περιστρεφόμενης πλατφόρμας στη μία άκρη και του ήσυχου παγκακιού στην άλλη, σαν αρχή και τέλος διαδρομής.</div>
+  <div class="field-label">Prompt (πρόσθεσε πριν το base style + consistency clause από πάνω)</div>
+  <div class="prompt-block">Simple split illustration: a spinning playground roundabout on one side fading into a quiet park bench under a tree on the other side, small path connecting them, symbolic before/after composition, soft colors.</div>
+  <div class="field-label">Safe area</div>
+  <div class="desc">Keep both landmarks recognizable and roughly equal in visual weight left/right.</div>
+</div>
+<div class="img-card" id="I-013">
+  <div class="img-head">
+    <span class="img-id">I-013</span>
+    <span class="tag size">Full page</span>
+    <span class="tag prio-HIGH">HIGH</span>
+    <span class="img-page">Σελίδα 47</span>
+  </div>
+  <dl class="meta-grid">
+    <div><dt>Χαρακτήρες</dt><dd>Μελίνα, Μαμά</dd></div>
+    <div><dt>Συναίσθημα</dt><dd>Θυμός</dd></div>
+    <div><dt>Camera</dt><dd>Eye level, medium shot</dd></div>
+    <div><dt>Aspect ratio</dt><dd>3:4</dd></div>
+  </dl>
+  <div class="desc"><strong>Palette:</strong> Dominant: 🔴 coral-red · Secondary: 🔵 soft blue · Accent: 🟡 yellow</div>
+  <div class="desc"><strong>Περιγραφή:</strong> Η Μελίνα μπροστά στην τηλεόραση, με σφιγμένες γροθιές και κόκκινα μάγουλα, η μαμά γονατισμένη δίπλα της με ήρεμο βλέμμα.</div>
+  <div class="field-label">Prompt (πρόσθεσε πριν το base style + consistency clause από πάνω)</div>
+  <div class="prompt-block">Melina standing in front of a TV with clenched fists and a flushed, frustrated expression, mom kneeling beside her at eye level with a calm, understanding expression, cozy living room in the evening, warm lamp light, emotionally tense but safe family moment.</div>
+  <div class="field-label">Safe area</div>
+  <div class="desc">Keep both faces at eye-level within the central band of the frame; TV can be softly out of focus in the background.</div>
+</div>
+<div class="img-card" id="I-014">
+  <div class="img-head">
+    <span class="img-id">I-014</span>
+    <span class="tag size">Full page</span>
+    <span class="tag prio-HIGH">HIGH</span>
+    <span class="img-page">Σελίδα 55</span>
+  </div>
+  <dl class="meta-grid">
+    <div><dt>Χαρακτήρες</dt><dd>Μελίνα</dd></div>
+    <div><dt>Συναίσθημα</dt><dd>Λύπη / μοναξιά</dd></div>
+    <div><dt>Camera</dt><dd>Wide shot, three-quarter angle</dd></div>
+    <div><dt>Aspect ratio</dt><dd>3:4</dd></div>
+  </dl>
+  <div class="desc"><strong>Palette:</strong> Dominant: 🔵 soft blue · Secondary: 🟢 sage · Accent: 🟡 yellow</div>
+  <div class="desc"><strong>Περιγραφή:</strong> Η Μελίνα κάθεται μόνη σε ένα σκαλοπάτι της αυλής του σχολείου, παρακολουθώντας από μακριά δύο συμμαθήτριές της να παίζουν.</div>
+  <div class="field-label">Prompt (πρόσθεσε πριν το base style + consistency clause από πάνω)</div>
+  <div class="prompt-block">Melina sitting alone on a school-yard step, head slightly bowed, watching two classmates play together in the distance, schoolyard with trees and a playground in the background, wistful and quietly sad mood, soft daylight.</div>
+  <div class="field-label">Safe area</div>
+  <div class="desc">Keep Melina in the foreground lower-third; the playing classmates should read as small and distant in the background.</div>
+</div>
+<div class="img-card" id="I-015">
+  <div class="img-head">
+    <span class="img-id">I-015</span>
+    <span class="tag size">Full page</span>
+    <span class="tag prio-HIGH">HIGH</span>
+    <span class="img-page">Σελίδα 63</span>
+  </div>
+  <dl class="meta-grid">
+    <div><dt>Χαρακτήρες</dt><dd>Μελίνα, Μπαμπάς</dd></div>
+    <div><dt>Συναίσθημα</dt><dd>Φόβος</dd></div>
+    <div><dt>Camera</dt><dd>Eye level, medium shot</dd></div>
+    <div><dt>Aspect ratio</dt><dd>3:4</dd></div>
+  </dl>
+  <div class="desc"><strong>Palette:</strong> Dominant: 🟣 lavender · Secondary: 🟡 yellow · Accent: 🩷 coral</div>
+  <div class="desc"><strong>Περιγραφή:</strong> Η Μελίνα στέκεται στην πόρτα μιας αίθουσας χορού, κρύβοντας το πρόσωπό της στο πλάι του μπαμπά, βλέποντας από μακριά άλλα παιδιά με ρούχα χορού.</div>
+  <div class="field-label">Prompt (πρόσθεσε πριν το base style + consistency clause από πάνω)</div>
+  <div class="prompt-block">Melina standing at the doorway of a dance studio, partially hiding her face against her dad's side, peeking shyly at other children in dance outfits inside the room, dad kneeling with a reassuring hand on her shoulder, bright studio interior with a wall of mirrors, nervous-but-supported mood.</div>
+  <div class="field-label">Safe area</div>
+  <div class="desc">Keep the doorway framing centered; Melina and dad should occupy the foreground, dance studio visible but softly behind them.</div>
+</div>
+<div class="img-card" id="I-016">
+  <div class="img-head">
+    <span class="img-id">I-016</span>
+    <span class="tag size">Full page</span>
+    <span class="tag prio-HIGH">HIGH</span>
+    <span class="img-page">Σελίδα 70</span>
+  </div>
+  <dl class="meta-grid">
+    <div><dt>Χαρακτήρες</dt><dd>Μελίνα, Νίκος, Μπαμπάς</dd></div>
+    <div><dt>Συναίσθημα</dt><dd>Απογοήτευση</dd></div>
+    <div><dt>Camera</dt><dd>Eye level, wide shot</dd></div>
+    <div><dt>Aspect ratio</dt><dd>3:4</dd></div>
+  </dl>
+  <div class="desc"><strong>Palette:</strong> Dominant: 🟡 yellow · Secondary: 🔴 coral-red · Accent: 🟢 sage</div>
+  <div class="desc"><strong>Περιγραφή:</strong> Επιτραπέζιο παιχνίδι στο τραπέζι, ο Νίκος πανηγυρίζει επειδή έφτασε πρώτος στο τέρμα, η Μελίνα κοιτάζει τα πιόνια με απογοήτευση.</div>
+  <div class="field-label">Prompt (πρόσθεσε πριν το base style + consistency clause από πάνω)</div>
+  <div class="prompt-block">A board game laid out on a table, Nikos cheering with raised arms because his piece reached the finish first, Melina looking at the game pieces with a disappointed pout, dad sitting across the table with a calm supportive expression, cozy living room, bittersweet family game-night mood.</div>
+  <div class="field-label">Safe area</div>
+  <div class="desc">Keep the game board and all three characters within frame; board details can be simplified/soft-focus.</div>
+</div>
+<div class="img-card" id="I-017">
+  <div class="img-head">
+    <span class="img-id">I-017</span>
+    <span class="tag size">Spot illustration</span>
+    <span class="tag prio-LOW">LOW</span>
+    <span class="img-page">Σελίδα 74</span>
+  </div>
+  <dl class="meta-grid">
+    <div><dt>Χαρακτήρες</dt><dd>Μελίνα, Νίκος, Μπαμπάς</dd></div>
+    <div><dt>Συναίσθημα</dt><dd>Χαρούμενη αναμέτρηση</dd></div>
+    <div><dt>Camera</dt><dd>Eye level, wide shot</dd></div>
+    <div><dt>Aspect ratio</dt><dd>4:3</dd></div>
+  </dl>
+  <div class="desc"><strong>Palette:</strong> Dominant: 🟢 sage · Secondary: 🟡 yellow · Accent: 🩷 coral</div>
+  <div class="desc"><strong>Περιγραφή:</strong> Η Μελίνα, ο Νίκος και ο μπαμπάς γύρω από ένα επιτραπέζιο παιχνίδι, χαμογελαστοί, ζάρι στον αέρα.</div>
+  <div class="field-label">Prompt (πρόσθεσε πριν το base style + consistency clause από πάνω)</div>
+  <div class="prompt-block">Melina, Nikos and dad sitting around a board game, all smiling, a die caught mid-air as if just thrown, playful family moment, warm living room light.</div>
+  <div class="field-label">Safe area</div>
+  <div class="desc">Keep all three faces visible; die can be slightly motion-blurred mid-air.</div>
+</div>
+<div class="img-card" id="I-018">
+  <div class="img-head">
+    <span class="img-id">I-018</span>
+    <span class="tag size">Full page</span>
+    <span class="tag prio-MEDIUM">MEDIUM</span>
+    <span class="img-page">Σελίδα 77</span>
+  </div>
+  <dl class="meta-grid">
+    <div><dt>Χαρακτήρες</dt><dd>Μελίνα</dd></div>
+    <div><dt>Συναίσθημα</dt><dd>Ανυπομονησία</dd></div>
+    <div><dt>Camera</dt><dd>Wide shot, eye level</dd></div>
+    <div><dt>Aspect ratio</dt><dd>3:4</dd></div>
+  </dl>
+  <div class="desc"><strong>Palette:</strong> Dominant: 🟢 sage · Secondary: 🟡 yellow · Accent: 🩷 coral</div>
+  <div class="desc"><strong>Περιγραφή:</strong> Η Μελίνα στέκεται δίπλα στις κούνιες της παιδικής χαράς, περιμένοντας τη σειρά της, κοιτάζοντας τα λουλούδια στο γρασίδι.</div>
+  <div class="field-label">Prompt (πρόσθεσε πριν το base style + consistency clause από πάνω)</div>
+  <div class="prompt-block">Melina standing beside a row of playground swings, waiting her turn with a slightly impatient but curious expression, looking down at colorful flowers in the grass, another child swinging in the background, sunny playground setting, patient waiting mood.</div>
+  <div class="field-label">Safe area</div>
+  <div class="desc">Keep Melina and the flowers in the lower half of the frame; swings and waiting child can occupy the upper half.</div>
+</div>
+<div class="img-card" id="I-019">
+  <div class="img-head">
+    <span class="img-id">I-019</span>
+    <span class="tag size">Full page</span>
+    <span class="tag prio-MEDIUM">MEDIUM</span>
+    <span class="img-page">Σελίδα 85</span>
+  </div>
+  <dl class="meta-grid">
+    <div><dt>Χαρακτήρες</dt><dd>Μελίνα, άγνωστο παιδί, Μαμά</dd></div>
+    <div><dt>Συναίσθημα</dt><dd>Απόρριψη / περιέργεια</dd></div>
+    <div><dt>Camera</dt><dd>Eye level, medium shot</dd></div>
+    <div><dt>Aspect ratio</dt><dd>3:4</dd></div>
+  </dl>
+  <div class="desc"><strong>Palette:</strong> Dominant: 🟡 yellow · Secondary: 🔵 soft blue · Accent: 🟣 lavender</div>
+  <div class="desc"><strong>Περιγραφή:</strong> Η Μελίνα στέκεται μπροστά σε ένα παιδί που παίζει μόνο του με μπάλα, με ερωτηματικό βλέμμα· η μαμά κάπως πιο πίσω παρακολουθεί με στοργή.</div>
+  <div class="field-label">Prompt (πρόσθεσε πριν το base style + consistency clause από πάνω)</div>
+  <div class="prompt-block">Melina standing in front of another child who is playing alone with a ball and has just said no to playing together, Melina has a puzzled, slightly hurt expression, mom standing a little further back watching with a warm supportive expression, sunny playground, gentle bittersweet mood.</div>
+  <div class="field-label">Safe area</div>
+  <div class="desc">Keep Melina's questioning expression and the other child's ball both visible in the central frame.</div>
+</div>
+<div class="img-card" id="I-020">
+  <div class="img-head">
+    <span class="img-id">I-020</span>
+    <span class="tag size">Full page</span>
+    <span class="tag prio-HIGH">HIGH</span>
+    <span class="img-page">Σελίδα 93</span>
+  </div>
+  <dl class="meta-grid">
+    <div><dt>Χαρακτήρες</dt><dd>Μελίνα, Μπαμπάς</dd></div>
+    <div><dt>Συναίσθημα</dt><dd>Αποφασιστικότητα</dd></div>
+    <div><dt>Camera</dt><dd>Wide shot, three-quarter, sense of motion</dd></div>
+    <div><dt>Aspect ratio</dt><dd>3:4</dd></div>
+  </dl>
+  <div class="desc"><strong>Palette:</strong> Dominant: 🟡 yellow · Secondary: 🟢 sage · Accent: 🔵 soft blue</div>
+  <div class="desc"><strong>Περιγραφή:</strong> Η Μελίνα πάνω στο ποδήλατό της χωρίς βοηθητικές ρόδες, ο μπαμπάς κρατά ελαφρά τη σέλα, και τα δύο χαμογελαστά αλλά συγκεντρωμένα.</div>
+  <div class="field-label">Prompt (πρόσθεσε πριν το base style + consistency clause από πάνω)</div>
+  <div class="prompt-block">Melina riding a bicycle without training wheels, dad lightly holding the back of the seat while jogging alongside, both with focused, determined smiles, a sunny neighborhood street with trees, encouraging and hopeful mood, sense of motion.</div>
+  <div class="field-label">Safe area</div>
+  <div class="desc">Keep the bicycle and both characters in the lower two-thirds; street/trees can extend into the upper third.</div>
+</div>
+<div class="img-card" id="I-021">
+  <div class="img-head">
+    <span class="img-id">I-021</span>
+    <span class="tag size">Full page</span>
+    <span class="tag prio-HIGH">HIGH</span>
+    <span class="img-page">Σελίδα 101</span>
+  </div>
+  <dl class="meta-grid">
+    <div><dt>Χαρακτήρες</dt><dd>Μαμά, Μελίνα, Παππούς</dd></div>
+    <div><dt>Συναίσθημα</dt><dd>Αποχωρισμός</dd></div>
+    <div><dt>Camera</dt><dd>Eye level, close-up</dd></div>
+    <div><dt>Aspect ratio</dt><dd>3:4</dd></div>
+  </dl>
+  <div class="desc"><strong>Palette:</strong> Dominant: 🟣 lavender · Secondary: 🩷 coral · Accent: 🟡 yellow (warm light)</div>
+  <div class="desc"><strong>Περιγραφή:</strong> Η μαμά φοράει το παλτό της δίπλα στην πόρτα, γονατισμένη στο ύψος της Μελίνας, κρατώντας της ένα μικρό κασκόλ· ο παππούς περιμένει χαμογελαστός από πίσω.</div>
+  <div class="field-label">Prompt (πρόσθεσε πριν το base style + consistency clause από πάνω)</div>
+  <div class="prompt-block">Mom kneeling at Melina's eye level by the front door, wearing her coat, handing Melina a small scarf to hold, grandpa (white moustache, hat, plaid vest) waiting warmly in the background, entryway of a cozy home, tender goodbye mood, soft evening light.</div>
+  <div class="field-label">Safe area</div>
+  <div class="desc">Keep mom and Melina's eye-level exchange centered; grandpa can be softly positioned in the background.</div>
+</div>
+<div class="img-card" id="I-022">
+  <div class="img-head">
+    <span class="img-id">I-022</span>
+    <span class="tag size">Full page</span>
+    <span class="tag prio-HIGH">HIGH</span>
+    <span class="img-page">Σελίδα 109</span>
+  </div>
+  <dl class="meta-grid">
+    <div><dt>Χαρακτήρες</dt><dd>Μελίνα, παιδιά, Γιαγιά</dd></div>
+    <div><dt>Συναίσθημα</dt><dd>Υπερδιέγερση</dd></div>
+    <div><dt>Camera</dt><dd>Wide shot, eye level</dd></div>
+    <div><dt>Aspect ratio</dt><dd>3:4</dd></div>
+  </dl>
+  <div class="desc"><strong>Palette:</strong> Dominant: 🩷 coral · Secondary: 🟡 yellow · Accent: 🟣 lavender</div>
+  <div class="desc"><strong>Περιγραφή:</strong> Πάρτι γενεθλίων, πολλά παιδιά τραγουδούν δυνατά γύρω από τούρτα με κεράκια, μπαλόνια, η Μελίνα καλύπτει ελαφρά τα αυτιά της.</div>
+  <div class="field-label">Prompt (πρόσθεσε πριν το base style + consistency clause από πάνω)</div>
+  <div class="prompt-block">A lively birthday party scene with several children singing loudly around a cake with candles, balloons and streamers, Melina standing slightly apart with her hands gently covering her ears, a slightly overwhelmed expression, grandma visible nearby noticing her, warm indoor party lighting.</div>
+  <div class="field-label">Safe area</div>
+  <div class="desc">Keep Melina's covered-ears gesture clearly visible in the foreground; the singing group can be busy/dense in the background.</div>
+</div>
+<div class="img-card" id="I-023">
+  <div class="img-head">
+    <span class="img-id">I-023</span>
+    <span class="tag size">Full page</span>
+    <span class="tag prio-MEDIUM">MEDIUM</span>
+    <span class="img-page">Σελίδα 116</span>
+  </div>
+  <dl class="meta-grid">
+    <div><dt>Χαρακτήρες</dt><dd>Μελίνα, Μπαμπάς</dd></div>
+    <div><dt>Συναίσθημα</dt><dd>Ανάγκη ησυχίας</dd></div>
+    <div><dt>Camera</dt><dd>Eye level, medium shot</dd></div>
+    <div><dt>Aspect ratio</dt><dd>3:4</dd></div>
+  </dl>
+  <div class="desc"><strong>Palette:</strong> Dominant: 🟢 sage · Secondary: 🟡 yellow · Accent: 🩷 coral</div>
+  <div class="desc"><strong>Περιγραφή:</strong> Η Μελίνα μόλις μπήκε σπίτι με τη σχολική της τσάντα, ο μπαμπάς κρατά ένα παιχνίδι έτοιμος να παίξουν, εκείνη δείχνει απαλά την ήρεμη γωνιά της.</div>
+  <div class="field-label">Prompt (πρόσθεσε πριν το base style + consistency clause από πάνω)</div>
+  <div class="prompt-block">Melina just walking in the front door still wearing her school backpack, dad standing nearby holding a board game eagerly, Melina gently pointing toward her cozy reading corner across the room, warm entryway lighting, understanding and patient family mood.</div>
+  <div class="field-label">Safe area</div>
+  <div class="desc">Keep Melina and dad in the foreground; the calm corner she's pointing to can be softly visible in the background.</div>
+</div>
+<div class="img-card" id="I-024">
+  <div class="img-head">
+    <span class="img-id">I-024</span>
+    <span class="tag size">Full page</span>
+    <span class="tag prio-MEDIUM">MEDIUM</span>
+    <span class="img-page">Σελίδα 123</span>
+  </div>
+  <dl class="meta-grid">
+    <div><dt>Χαρακτήρες</dt><dd>Μελίνα, Μπισκότο</dd></div>
+    <div><dt>Συναίσθημα</dt><dd>Απογοήτευση / αποφασιστικότητα</dd></div>
+    <div><dt>Camera</dt><dd>Close-up, eye level</dd></div>
+    <div><dt>Aspect ratio</dt><dd>3:4</dd></div>
+  </dl>
+  <div class="desc"><strong>Palette:</strong> Dominant: 🟡 yellow · Secondary: 🟢 sage · Accent: 🟣 lavender</div>
+  <div class="desc"><strong>Περιγραφή:</strong> Η Μελίνα προσπαθεί να δέσει μόνη της τα κορδόνια της, με μπερδεμένο βλέμμα, ο Μπισκότο κοιτάζει από δίπλα.</div>
+  <div class="field-label">Prompt (πρόσθεσε πριν το base style + consistency clause από πάνω)</div>
+  <div class="prompt-block">Melina sitting on the floor trying to tie her own shoelaces, a puzzled and slightly frustrated expression, tangled laces, Biscuit the puppy sitting beside her watching curiously, cozy hallway setting, determined problem-solving mood.</div>
+  <div class="field-label">Safe area</div>
+  <div class="desc">Keep Melina's hands and the shoelaces clearly visible and readable in the central frame.</div>
+</div>
+<div class="img-card" id="I-025">
+  <div class="img-head">
+    <span class="img-id">I-025</span>
+    <span class="tag size">Full page</span>
+    <span class="tag prio-HIGH">HIGH</span>
+    <span class="img-page">Σελίδα 130</span>
+  </div>
+  <dl class="meta-grid">
+    <div><dt>Χαρακτήρες</dt><dd>Μελίνα, Μπισκότο</dd></div>
+    <div><dt>Συναίσθημα</dt><dd>Υπερηφάνεια / ολοκλήρωση</dd></div>
+    <div><dt>Camera</dt><dd>Eye level, medium shot</dd></div>
+    <div><dt>Aspect ratio</dt><dd>3:4</dd></div>
+  </dl>
+  <div class="desc"><strong>Palette:</strong> Dominant: 🟣 lavender · Secondary: 🟡 yellow · Accent: 🟢 sage</div>
+  <div class="desc"><strong>Περιγραφή:</strong> Η Μελίνα κάθεται στην ήρεμη γωνιά της με τον Μπισκότο, γύρω τους μικρές φανταστικές φυσαλίδες με όλα τα συναισθήματα του βιβλίου.</div>
+  <div class="field-label">Prompt (πρόσθεσε πριν το base style + consistency clause από πάνω)</div>
+  <div class="prompt-block">Melina sitting contentedly in her cozy calm corner with Biscuit the puppy curled beside her, surrounded by small whimsical floating bubble-shapes each containing a different simple emoji-like face (happy, sad, angry, scared, surprised, calm), warm evening light, reflective and proud mood, sense of a completed journey.</div>
+  <div class="field-label">Safe area</div>
+  <div class="desc">Keep Melina and Biscuit centered; the floating emotion bubbles can be arranged loosely around the upper frame.</div>
+</div>
+<div class="img-card" id="I-026">
+  <div class="img-head">
+    <span class="img-id">I-026</span>
+    <span class="tag size">Spot illustration</span>
+    <span class="tag prio-LOW">LOW</span>
+    <span class="img-page">Σελίδα 134</span>
+  </div>
+  <dl class="meta-grid">
+    <div><dt>Χαρακτήρες</dt><dd>Μελίνα, Μαμά, Μπαμπάς, Μπισκότο</dd></div>
+    <div><dt>Συναίσθημα</dt><dd>Γιορτινή ολοκλήρωση</dd></div>
+    <div><dt>Camera</dt><dd>Wide shot, eye level</dd></div>
+    <div><dt>Aspect ratio</dt><dd>4:3</dd></div>
+  </dl>
+  <div class="desc"><strong>Palette:</strong> Dominant: 🟣 lavender · Secondary: 🩷 coral · Accent: 🟡 yellow</div>
+  <div class="desc"><strong>Περιγραφή:</strong> Όλη η οικογένεια γύρω από το μεγάλο επιτραπέζιο, γιορτινή ατμόσφαιρα, μικρές φυσαλίδες συναισθημάτων στον αέρα.</div>
+  <div class="field-label">Prompt (πρόσθεσε πριν το base style + consistency clause από πάνω)</div>
+  <div class="prompt-block">The whole family (Melina, mom, dad) and Biscuit the puppy gathered around the large final board game, festive celebratory atmosphere, tiny floating emotion-face bubbles in the air, warm family-game-night lighting.</div>
+  <div class="field-label">Safe area</div>
+  <div class="desc">Keep all family members within frame; bubbles can float off the top edge.</div>
+</div>
+
+<h2 class="section-h">Reusable Asset Library (39)</h2>
+<p class="section-sub">Χαρακτήρες σε πολλαπλές στάσεις/εκφράσεις, επαναλαμβανόμενα σκηνικά, και διακοσμητικά stamps — παράγονται ΜΙΑ φορά το καθένα και ξαναχρησιμοποιούνται σε όλο το βιβλίο (πολύ πιο αποδοτικό από 60+ μοναδικές σκηνές).</p>
+<div class="cat-group"><div class="cat-title">🐶 Μπισκότο — στάσεις</div><div class="asset-grid">
+    <div class="asset-card">
+      <div class="asset-head"><span class="asset-id">A-001</span><span class="asset-name">Χαρούμενο πήδημα</span><span class="tag prio-HIGH" style="margin-left:auto;">HIGH</span></div>
+      <div class="asset-prompt">Reference sheet asset: Biscuit the puppy (small cream/white fluffy puppy, floppy brown ears, blue collar), jumping mid-air with tongue out, ears flapping, pure joy, plain neutral background, clean isolated character study.</div>
+    </div>
+    <div class="asset-card">
+      <div class="asset-head"><span class="asset-id">A-002</span><span class="asset-name">Καθισμένος προσεκτικός</span><span class="tag prio-HIGH" style="margin-left:auto;">HIGH</span></div>
+      <div class="asset-prompt">Reference sheet asset: Biscuit the puppy (small cream/white fluffy puppy, floppy brown ears, blue collar), sitting attentively, head tilted to one side, listening, plain neutral background, clean isolated character study.</div>
+    </div>
+    <div class="asset-card">
+      <div class="asset-head"><span class="asset-id">A-003</span><span class="asset-name">Κοιμισμένος κουλουριασμένος</span><span class="tag prio-HIGH" style="margin-left:auto;">HIGH</span></div>
+      <div class="asset-prompt">Reference sheet asset: Biscuit the puppy (small cream/white fluffy puppy, floppy brown ears, blue collar), curled up asleep in a tight ball, peaceful, plain neutral background, clean isolated character study.</div>
+    </div>
+    <div class="asset-card">
+      <div class="asset-head"><span class="asset-id">A-004</span><span class="asset-name">Ανήσυχος με γερμένο κεφάλι</span><span class="tag prio-HIGH" style="margin-left:auto;">HIGH</span></div>
+      <div class="asset-prompt">Reference sheet asset: Biscuit the puppy (small cream/white fluffy puppy, floppy brown ears, blue collar), standing with head tilted, worried/concerned expression, plain neutral background, clean isolated character study.</div>
+    </div>
+    <div class="asset-card">
+      <div class="asset-head"><span class="asset-id">A-005</span><span class="asset-name">Τρέχει</span><span class="tag prio-MEDIUM" style="margin-left:auto;">MEDIUM</span></div>
+      <div class="asset-prompt">Reference sheet asset: Biscuit the puppy (small cream/white fluffy puppy, floppy brown ears, blue collar), running joyfully, ears flying back, motion lines, plain neutral background, clean isolated character study.</div>
+    </div>
+    <div class="asset-card">
+      <div class="asset-head"><span class="asset-id">A-006</span><span class="asset-name">Παρηγορητική παρουσία</span><span class="tag prio-MEDIUM" style="margin-left:auto;">MEDIUM</span></div>
+      <div class="asset-prompt">Reference sheet asset: Biscuit the puppy (small cream/white fluffy puppy, floppy brown ears, blue collar), sitting quietly pressed against someone's leg, gentle supportive look, plain neutral background, clean isolated character study.</div>
+    </div>
+    <div class="asset-card">
+      <div class="asset-head"><span class="asset-id">A-007</span><span class="asset-name">Με καπελάκι πάρτι</span><span class="tag prio-MEDIUM" style="margin-left:auto;">MEDIUM</span></div>
+      <div class="asset-prompt">Reference sheet asset: Biscuit the puppy (small cream/white fluffy puppy, floppy brown ears, blue collar), wearing a small crooked party hat, festive, plain neutral background, clean isolated character study.</div>
+    </div>
+    <div class="asset-card">
+      <div class="asset-head"><span class="asset-id">A-008</span><span class="asset-name">Σκάβει/κρύβει κάτι</span><span class="tag prio-MEDIUM" style="margin-left:auto;">MEDIUM</span></div>
+      <div class="asset-prompt">Reference sheet asset: Biscuit the puppy (small cream/white fluffy puppy, floppy brown ears, blue collar), digging or burying a small object in the ground, playful mischief, plain neutral background, clean isolated character study.</div>
+    </div>
+    <div class="asset-card">
+      <div class="asset-head"><span class="asset-id">A-009</span><span class="asset-name">Ένοχο βλέμμα</span><span class="tag prio-MEDIUM" style="margin-left:auto;">MEDIUM</span></div>
+      <div class="asset-prompt">Reference sheet asset: Biscuit the puppy (small cream/white fluffy puppy, floppy brown ears, blue collar), guilty expression, ears down, head lowered slightly, plain neutral background, clean isolated character study.</div>
+    </div>
+    <div class="asset-card">
+      <div class="asset-head"><span class="asset-id">A-010</span><span class="asset-name">Σε εγρήγορση</span><span class="tag prio-MEDIUM" style="margin-left:auto;">MEDIUM</span></div>
+      <div class="asset-prompt">Reference sheet asset: Biscuit the puppy (small cream/white fluffy puppy, floppy brown ears, blue collar), sitting upright, ears perked up, alert and curious, plain neutral background, clean isolated character study.</div>
+    </div></div></div><div class="cat-group"><div class="cat-title">👧 Μελίνα — εκφράσεις προσώπου</div><div class="asset-grid">
+    <div class="asset-card">
+      <div class="asset-head"><span class="asset-id">A-011</span><span class="asset-name">Χαρά</span><span class="tag prio-HIGH" style="margin-left:auto;">HIGH</span></div>
+      <div class="asset-prompt">Reference sheet asset: Melina (5.5-year-old girl, brown bob haircut with front fringe, pink side bow, big brown eyes, light freckles) headshot/bust portrait, expression: wide joyful smile, eyes crinkled with happiness, plain neutral background, clean isolated character study.</div>
+    </div>
+    <div class="asset-card">
+      <div class="asset-head"><span class="asset-id">A-012</span><span class="asset-name">Λύπη</span><span class="tag prio-HIGH" style="margin-left:auto;">HIGH</span></div>
+      <div class="asset-prompt">Reference sheet asset: Melina (5.5-year-old girl, brown bob haircut with front fringe, pink side bow, big brown eyes, light freckles) headshot/bust portrait, expression: downturned mouth, watery eyes, gentle sadness, plain neutral background, clean isolated character study.</div>
+    </div>
+    <div class="asset-card">
+      <div class="asset-head"><span class="asset-id">A-013</span><span class="asset-name">Θυμός</span><span class="tag prio-HIGH" style="margin-left:auto;">HIGH</span></div>
+      <div class="asset-prompt">Reference sheet asset: Melina (5.5-year-old girl, brown bob haircut with front fringe, pink side bow, big brown eyes, light freckles) headshot/bust portrait, expression: furrowed brow, flushed cheeks, clenched jaw, not scary, plain neutral background, clean isolated character study.</div>
+    </div>
+    <div class="asset-card">
+      <div class="asset-head"><span class="asset-id">A-014</span><span class="asset-name">Φόβος</span><span class="tag prio-HIGH" style="margin-left:auto;">HIGH</span></div>
+      <div class="asset-prompt">Reference sheet asset: Melina (5.5-year-old girl, brown bob haircut with front fringe, pink side bow, big brown eyes, light freckles) headshot/bust portrait, expression: wide eyes, slightly open mouth, nervous eyebrows, plain neutral background, clean isolated character study.</div>
+    </div>
+    <div class="asset-card">
+      <div class="asset-head"><span class="asset-id">A-015</span><span class="asset-name">Έκπληξη</span><span class="tag prio-HIGH" style="margin-left:auto;">HIGH</span></div>
+      <div class="asset-prompt">Reference sheet asset: Melina (5.5-year-old girl, brown bob haircut with front fringe, pink side bow, big brown eyes, light freckles) headshot/bust portrait, expression: wide open eyes and mouth in an 'O' shape, plain neutral background, clean isolated character study.</div>
+    </div>
+    <div class="asset-card">
+      <div class="asset-head"><span class="asset-id">A-016</span><span class="asset-name">Ηρεμία</span><span class="tag prio-HIGH" style="margin-left:auto;">HIGH</span></div>
+      <div class="asset-prompt">Reference sheet asset: Melina (5.5-year-old girl, brown bob haircut with front fringe, pink side bow, big brown eyes, light freckles) headshot/bust portrait, expression: soft closed-mouth smile, relaxed eyes, peaceful, plain neutral background, clean isolated character study.</div>
+    </div>
+    <div class="asset-card">
+      <div class="asset-head"><span class="asset-id">A-017</span><span class="asset-name">Αποφασιστικότητα</span><span class="tag prio-HIGH" style="margin-left:auto;">HIGH</span></div>
+      <div class="asset-prompt">Reference sheet asset: Melina (5.5-year-old girl, brown bob haircut with front fringe, pink side bow, big brown eyes, light freckles) headshot/bust portrait, expression: determined focused expression, slight smile, tongue-out concentration, plain neutral background, clean isolated character study.</div>
+    </div>
+    <div class="asset-card">
+      <div class="asset-head"><span class="asset-id">A-018</span><span class="asset-name">Σκεπτική/Περίεργη</span><span class="tag prio-HIGH" style="margin-left:auto;">HIGH</span></div>
+      <div class="asset-prompt">Reference sheet asset: Melina (5.5-year-old girl, brown bob haircut with front fringe, pink side bow, big brown eyes, light freckles) headshot/bust portrait, expression: head tilted, one eyebrow raised, curious thinking expression, plain neutral background, clean isolated character study.</div>
+    </div></div></div><div class="cat-group"><div class="cat-title">🥕 Καρότο (λούτρινο)</div><div class="asset-grid">
+    <div class="asset-card">
+      <div class="asset-head"><span class="asset-id">A-019</span><span class="asset-name">Βασική αναφορά</span><span class="tag prio-HIGH" style="margin-left:auto;">HIGH</span></div>
+      <div class="asset-prompt">Reference sheet asset: Carrot, Melina's small plush bunny toy, soft beige fur, floppy ears, one slightly worn ear, simple friendly stitched-smile face, plain neutral background.</div>
+    </div></div></div><div class="cat-group"><div class="cat-title">👨‍👩‍👧 Δευτερεύοντες χαρακτήρες</div><div class="asset-grid">
+    <div class="asset-card">
+      <div class="asset-head"><span class="asset-id">A-020</span><span class="asset-name">Μαμά</span><span class="tag prio-HIGH" style="margin-left:auto;">HIGH</span></div>
+      <div class="asset-prompt">Character reference sheet: Mom: brown hair in a ponytail, soft lavender cardigan, warm gentle smile, full-body reference pose, warm children's picture-book illustration, soft rounded shapes, thick clean linework in deep indigo (#2E2A47), gouache/watercolor digital texture, big expressive eyes, pastel palette (lavender #7B6FC4, coral #E85D42, sunny yellow #F4B93C, sage green #5AA588, soft blue #4E85B8), toddler-book proportions, warm soft lighting, no photorealism, no anime style, plain neutral background, clean full-body character study, consistent with the book's overall style.</div>
+    </div>
+    <div class="asset-card">
+      <div class="asset-head"><span class="asset-id">A-021</span><span class="asset-name">Μπαμπάς</span><span class="tag prio-HIGH" style="margin-left:auto;">HIGH</span></div>
+      <div class="asset-prompt">Character reference sheet: Dad: short curly hair, glasses, plaid shirt, warm approachable smile, full-body reference pose, warm children's picture-book illustration, soft rounded shapes, thick clean linework in deep indigo (#2E2A47), gouache/watercolor digital texture, big expressive eyes, pastel palette (lavender #7B6FC4, coral #E85D42, sunny yellow #F4B93C, sage green #5AA588, soft blue #4E85B8), toddler-book proportions, warm soft lighting, no photorealism, no anime style, plain neutral background, clean full-body character study, consistent with the book's overall style.</div>
+    </div>
+    <div class="asset-card">
+      <div class="asset-head"><span class="asset-id">A-022</span><span class="asset-name">Γιαγιά</span><span class="tag prio-MEDIUM" style="margin-left:auto;">MEDIUM</span></div>
+      <div class="asset-prompt">Character reference sheet: Grandma: silver hair in a bun, floral-print apron, kind smile, full-body reference pose, warm children's picture-book illustration, soft rounded shapes, thick clean linework in deep indigo (#2E2A47), gouache/watercolor digital texture, big expressive eyes, pastel palette (lavender #7B6FC4, coral #E85D42, sunny yellow #F4B93C, sage green #5AA588, soft blue #4E85B8), toddler-book proportions, warm soft lighting, no photorealism, no anime style, plain neutral background, clean full-body character study, consistent with the book's overall style.</div>
+    </div>
+    <div class="asset-card">
+      <div class="asset-head"><span class="asset-id">A-023</span><span class="asset-name">Παππούς</span><span class="tag prio-MEDIUM" style="margin-left:auto;">MEDIUM</span></div>
+      <div class="asset-prompt">Character reference sheet: Grandpa: white moustache, brimmed hat, plaid vest, cheerful smile, full-body reference pose, warm children's picture-book illustration, soft rounded shapes, thick clean linework in deep indigo (#2E2A47), gouache/watercolor digital texture, big expressive eyes, pastel palette (lavender #7B6FC4, coral #E85D42, sunny yellow #F4B93C, sage green #5AA588, soft blue #4E85B8), toddler-book proportions, warm soft lighting, no photorealism, no anime style, plain neutral background, clean full-body character study, consistent with the book's overall style.</div>
+    </div>
+    <div class="asset-card">
+      <div class="asset-head"><span class="asset-id">A-024</span><span class="asset-name">Σοφία</span><span class="tag prio-MEDIUM" style="margin-left:auto;">MEDIUM</span></div>
+      <div class="asset-prompt">Character reference sheet: Sofia: curly red hair, girl about 5-6 years old, cheerful expression, full-body reference pose, warm children's picture-book illustration, soft rounded shapes, thick clean linework in deep indigo (#2E2A47), gouache/watercolor digital texture, big expressive eyes, pastel palette (lavender #7B6FC4, coral #E85D42, sunny yellow #F4B93C, sage green #5AA588, soft blue #4E85B8), toddler-book proportions, warm soft lighting, no photorealism, no anime style, plain neutral background, clean full-body character study, consistent with the book's overall style.</div>
+    </div>
+    <div class="asset-card">
+      <div class="asset-head"><span class="asset-id">A-025</span><span class="asset-name">Νίκος</span><span class="tag prio-MEDIUM" style="margin-left:auto;">MEDIUM</span></div>
+      <div class="asset-prompt">Character reference sheet: Nikos: energetic boy about 6 years old, short brown hair, big grin, full-body reference pose, warm children's picture-book illustration, soft rounded shapes, thick clean linework in deep indigo (#2E2A47), gouache/watercolor digital texture, big expressive eyes, pastel palette (lavender #7B6FC4, coral #E85D42, sunny yellow #F4B93C, sage green #5AA588, soft blue #4E85B8), toddler-book proportions, warm soft lighting, no photorealism, no anime style, plain neutral background, clean full-body character study, consistent with the book's overall style.</div>
+    </div>
+    <div class="asset-card">
+      <div class="asset-head"><span class="asset-id">A-026</span><span class="asset-name">Λεωνίδας</span><span class="tag prio-MEDIUM" style="margin-left:auto;">MEDIUM</span></div>
+      <div class="asset-prompt">Character reference sheet: Leonidas: quiet boy about 5 years old, neat dark hair, gentle shy smile, full-body reference pose, warm children's picture-book illustration, soft rounded shapes, thick clean linework in deep indigo (#2E2A47), gouache/watercolor digital texture, big expressive eyes, pastel palette (lavender #7B6FC4, coral #E85D42, sunny yellow #F4B93C, sage green #5AA588, soft blue #4E85B8), toddler-book proportions, warm soft lighting, no photorealism, no anime style, plain neutral background, clean full-body character study, consistent with the book's overall style.</div>
+    </div></div></div><div class="cat-group"><div class="cat-title">🏡 Επαναλαμβανόμενα σκηνικά</div><div class="asset-grid">
+    <div class="asset-card">
+      <div class="asset-head"><span class="asset-id">A-027</span><span class="asset-name">Η ήρεμη γωνιά</span><span class="tag prio-MEDIUM" style="margin-left:auto;">MEDIUM</span></div>
+      <div class="asset-prompt">Environment reference asset: a cozy reading nook with a soft rug, floor cushion, small bookshelf, blanket, and a fairy-light string, warm children's picture-book illustration, soft rounded shapes, thick clean linework in deep indigo (#2E2A47), gouache/watercolor digital texture, big expressive eyes, pastel palette (lavender #7B6FC4, coral #E85D42, sunny yellow #F4B93C, sage green #5AA588, soft blue #4E85B8), toddler-book proportions, warm soft lighting, no photorealism, no anime style, no characters, empty scene ready to have characters added later.</div>
+    </div>
+    <div class="asset-card">
+      <div class="asset-head"><span class="asset-id">A-028</span><span class="asset-name">Η κούνια/παγκάκι παιδικής χαράς</span><span class="tag prio-MEDIUM" style="margin-left:auto;">MEDIUM</span></div>
+      <div class="asset-prompt">Environment reference asset: a colorful playground swing set beside a quiet wooden park bench under a tree, warm children's picture-book illustration, soft rounded shapes, thick clean linework in deep indigo (#2E2A47), gouache/watercolor digital texture, big expressive eyes, pastel palette (lavender #7B6FC4, coral #E85D42, sunny yellow #F4B93C, sage green #5AA588, soft blue #4E85B8), toddler-book proportions, warm soft lighting, no photorealism, no anime style, no characters, empty scene ready to have characters added later.</div>
+    </div>
+    <div class="asset-card">
+      <div class="asset-head"><span class="asset-id">A-029</span><span class="asset-name">Ένα δέντρο</span><span class="tag prio-MEDIUM" style="margin-left:auto;">MEDIUM</span></div>
+      <div class="asset-prompt">Environment reference asset: a friendly rounded-canopy tree, simple and iconic, suitable for a park or garden scene, warm children's picture-book illustration, soft rounded shapes, thick clean linework in deep indigo (#2E2A47), gouache/watercolor digital texture, big expressive eyes, pastel palette (lavender #7B6FC4, coral #E85D42, sunny yellow #F4B93C, sage green #5AA588, soft blue #4E85B8), toddler-book proportions, warm soft lighting, no photorealism, no anime style, no characters, empty scene ready to have characters added later.</div>
+    </div>
+    <div class="asset-card">
+      <div class="asset-head"><span class="asset-id">A-030</span><span class="asset-name">Το ποδήλατο της Μελίνας</span><span class="tag prio-MEDIUM" style="margin-left:auto;">MEDIUM</span></div>
+      <div class="asset-prompt">Environment reference asset: a small kids' bicycle without training wheels, pastel colors, a basket with flowers on front, warm children's picture-book illustration, soft rounded shapes, thick clean linework in deep indigo (#2E2A47), gouache/watercolor digital texture, big expressive eyes, pastel palette (lavender #7B6FC4, coral #E85D42, sunny yellow #F4B93C, sage green #5AA588, soft blue #4E85B8), toddler-book proportions, warm soft lighting, no photorealism, no anime style, no characters, empty scene ready to have characters added later.</div>
+    </div>
+    <div class="asset-card">
+      <div class="asset-head"><span class="asset-id">A-031</span><span class="asset-name">Το δωμάτιο της Μελίνας</span><span class="tag prio-MEDIUM" style="margin-left:auto;">MEDIUM</span></div>
+      <div class="asset-prompt">Environment reference asset: a cozy children's bedroom with a bed, bookshelf, window with curtains, warm evening light, warm children's picture-book illustration, soft rounded shapes, thick clean linework in deep indigo (#2E2A47), gouache/watercolor digital texture, big expressive eyes, pastel palette (lavender #7B6FC4, coral #E85D42, sunny yellow #F4B93C, sage green #5AA588, soft blue #4E85B8), toddler-book proportions, warm soft lighting, no photorealism, no anime style, no characters, empty scene ready to have characters added later.</div>
+    </div>
+    <div class="asset-card">
+      <div class="asset-head"><span class="asset-id">A-032</span><span class="asset-name">Η αίθουσα χορού</span><span class="tag prio-MEDIUM" style="margin-left:auto;">MEDIUM</span></div>
+      <div class="asset-prompt">Environment reference asset: a bright dance studio interior with a wall of mirrors and a wooden floor, warm children's picture-book illustration, soft rounded shapes, thick clean linework in deep indigo (#2E2A47), gouache/watercolor digital texture, big expressive eyes, pastel palette (lavender #7B6FC4, coral #E85D42, sunny yellow #F4B93C, sage green #5AA588, soft blue #4E85B8), toddler-book proportions, warm soft lighting, no photorealism, no anime style, no characters, empty scene ready to have characters added later.</div>
+    </div>
+    <div class="asset-card">
+      <div class="asset-head"><span class="asset-id">A-033</span><span class="asset-name">Το σαλόνι/κουζίνα</span><span class="tag prio-MEDIUM" style="margin-left:auto;">MEDIUM</span></div>
+      <div class="asset-prompt">Environment reference asset: a warm, lived-in family living-room/kitchen combo space with a sofa, TV, and dining table, warm children's picture-book illustration, soft rounded shapes, thick clean linework in deep indigo (#2E2A47), gouache/watercolor digital texture, big expressive eyes, pastel palette (lavender #7B6FC4, coral #E85D42, sunny yellow #F4B93C, sage green #5AA588, soft blue #4E85B8), toddler-book proportions, warm soft lighting, no photorealism, no anime style, no characters, empty scene ready to have characters added later.</div>
+    </div></div></div><div class="cat-group"><div class="cat-title">✨ Διακοσμητικά doodle stamps (γωνίες σελίδων)</div><div class="asset-grid">
+    <div class="asset-card">
+      <div class="asset-head"><span class="asset-id">A-034</span><span class="asset-name">Καρδιά</span><span class="tag prio-LOW" style="margin-left:auto;">LOW</span></div>
+      <div class="asset-prompt">Small decorative doodle stamp asset: a simple hand-drawn style heart doodle, thick outline, small sparkle accents, deep indigo linework (#2E2A47), transparent background, simple enough to scatter as a recurring page accent throughout the book.</div>
+    </div>
+    <div class="asset-card">
+      <div class="asset-head"><span class="asset-id">A-035</span><span class="asset-name">Αστέρι</span><span class="tag prio-LOW" style="margin-left:auto;">LOW</span></div>
+      <div class="asset-prompt">Small decorative doodle stamp asset: a simple hand-drawn style star doodle, thick outline, rounded points, deep indigo linework (#2E2A47), transparent background, simple enough to scatter as a recurring page accent throughout the book.</div>
+    </div>
+    <div class="asset-card">
+      <div class="asset-head"><span class="asset-id">A-036</span><span class="asset-name">Σύννεφο</span><span class="tag prio-LOW" style="margin-left:auto;">LOW</span></div>
+      <div class="asset-prompt">Small decorative doodle stamp asset: a simple hand-drawn style fluffy cloud doodle, thick outline, deep indigo linework (#2E2A47), transparent background, simple enough to scatter as a recurring page accent throughout the book.</div>
+    </div>
+    <div class="asset-card">
+      <div class="asset-head"><span class="asset-id">A-037</span><span class="asset-name">Λουλούδι</span><span class="tag prio-LOW" style="margin-left:auto;">LOW</span></div>
+      <div class="asset-prompt">Small decorative doodle stamp asset: a simple hand-drawn style small flower doodle, five rounded petals, thick outline, deep indigo linework (#2E2A47), transparent background, simple enough to scatter as a recurring page accent throughout the book.</div>
+    </div>
+    <div class="asset-card">
+      <div class="asset-head"><span class="asset-id">A-038</span><span class="asset-name">Πατούσα Μπισκότου</span><span class="tag prio-LOW" style="margin-left:auto;">LOW</span></div>
+      <div class="asset-prompt">Small decorative doodle stamp asset: a simple hand-drawn style paw-print doodle matching Biscuit's paw shape, deep indigo linework (#2E2A47), transparent background, simple enough to scatter as a recurring page accent throughout the book.</div>
+    </div>
+    <div class="asset-card">
+      <div class="asset-head"><span class="asset-id">A-039</span><span class="asset-name">Μπαλόνι</span><span class="tag prio-LOW" style="margin-left:auto;">LOW</span></div>
+      <div class="asset-prompt">Small decorative doodle stamp asset: a simple hand-drawn style small party balloon doodle with a curly string, deep indigo linework (#2E2A47), transparent background, simple enough to scatter as a recurring page accent throughout the book.</div>
+    </div></div></div>

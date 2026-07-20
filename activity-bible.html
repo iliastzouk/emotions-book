@@ -1,0 +1,321 @@
+<title>Activity Bible — Οι Περιπέτειες των Συναισθημάτων</title>
+<style>
+  :root {
+    --paper: #FBFAFF; --ink: #2E2A47; --ink-soft: #5A5578;
+    --card: #FFFFFF; --line: rgba(46,42,71,0.14);
+    --coral: #E85D42; --coral-soft: #FDE4DD;
+    --yellow: #F4B93C; --yellow-soft: #FDF0D2;
+    --sage: #5AA588; --sage-soft: #E1F1EA;
+    --purple: #7B6FC4; --purple-soft: #EAE6F9;
+    --blue-soft: #E3EEF6;
+  }
+  :root[data-theme="dark"] {
+    --paper: #1B1830; --ink: #EDEAFB; --ink-soft: #B6AFD6;
+    --card: #252140; --line: rgba(237,234,251,0.14);
+    --coral-soft: #4A2A26; --yellow-soft: #4A3C1E; --sage-soft: #1E3A30; --purple-soft: #322A54; --blue-soft: #223244;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #1B1830; --ink: #EDEAFB; --ink-soft: #B6AFD6;
+      --card: #252140; --line: rgba(237,234,251,0.14);
+      --coral-soft: #4A2A26; --yellow-soft: #4A3C1E; --sage-soft: #1E3A30; --purple-soft: #322A54; --blue-soft: #223244;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--paper); color: var(--ink);
+    font-family: "Source Sans 3", Verdana, "Segoe UI", Arial, sans-serif;
+    max-width: 1040px; margin: 0 auto; padding: 56px 24px 100px; line-height: 1.6;
+  }
+  h1.title {
+    font-family: "Comfortaa", "Trebuchet MS", sans-serif; font-weight: 700;
+    color: var(--purple); font-size: clamp(1.6rem, 4vw, 2.1rem); text-align: center; text-wrap: balance; margin: 0 0 6px;
+  }
+  .subtitle { text-align: center; color: var(--ink-soft); font-size: 1rem; margin: 0 0 20px; }
+  .v2-tag {
+    display: block; text-align: center; font-size: 0.78rem; color: var(--coral);
+    background: var(--coral-soft); width: fit-content; margin: 0 auto 30px; padding: 5px 14px; border-radius: 20px; font-weight: bold;
+  }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 20px; }
+  .legend-chip {
+    display: flex; align-items: center; gap: 6px; font-size: 0.82rem;
+    border: 1px solid var(--line); border-radius: 20px; padding: 6px 14px; background: var(--card);
+  }
+  .legend-chip b { font-variant-numeric: tabular-nums; color: var(--purple); }
+  .legend-chip.new-type { border-color: var(--sage); background: var(--sage-soft); }
+
+  .biscuit-explainer {
+    max-width: 720px; margin: 0 auto 40px; text-align: center; background: var(--yellow-soft);
+    border-radius: 14px; padding: 16px 24px; font-size: 0.9rem;
+  }
+
+  table { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
+  thead th {
+    text-align: left; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.04em;
+    color: var(--ink-soft); padding: 8px 10px; border-bottom: 2px solid var(--line);
+  }
+  tbody td { padding: 12px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tbody tr:hover { background: var(--purple-soft); }
+  td.ch-num { font-weight: bold; color: var(--purple); white-space: nowrap; }
+  td.ch-name { font-weight: bold; }
+  .kept { font-size: 0.8rem; color: var(--ink-soft); }
+  .new-act { display: flex; flex-direction: column; gap: 5px; }
+  .new-act span { font-size: 0.85rem; }
+  .stars { color: var(--yellow); font-size: 0.75rem; white-space: nowrap; }
+  .mission {
+    margin-top: 6px; font-size: 0.8rem; font-style: italic; color: var(--sage);
+    background: var(--sage-soft); border-radius: 8px; padding: 6px 10px; display: block;
+  }
+
+  .totals {
+    margin-top: 40px; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 24px 28px;
+  }
+  .totals h2 { font-family: "Comfortaa", "Trebuchet MS", sans-serif; font-size: 1.1rem; margin: 0 0 14px; color: var(--ink); }
+  .totals-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap: 10px; }
+  .totals-grid div { font-size: 0.85rem; }
+  .totals-grid b { font-variant-numeric: tabular-nums; color: var(--purple); }
+
+  .note-box {
+    margin-top: 24px; background: var(--yellow-soft); border-radius: 12px; padding: 16px 20px; font-size: 0.88rem;
+  }
+  .note-box + .note-box { margin-top: 14px; }
+</style>
+
+<h1 class="title">Activity Bible</h1>
+<p class="subtitle">Ποια δραστηριότητα μπαίνει σε ποιο κεφάλαιο — καμία επανάληψη τύπου σε γειτονικά κεφάλαια</p>
+<span class="v2-tag">v2 — προστέθηκαν hidden objects, spot-the-emotion, memory, sequence cards, mini χειροτεχνία, επίπεδα δυσκολίας, Αποστολές Μπισκότου</span>
+
+<div class="legend">
+  <div class="legend-chip">🎨 Ζωγραφική <b>×8</b></div>
+  <div class="legend-chip">🔍 Βρες τις διαφορές <b>×3</b></div>
+  <div class="legend-chip">🌸 Λαβύρινθος <b>×4</b></div>
+  <div class="legend-chip">🧩 Αντιστοίχιση <b>×6</b></div>
+  <div class="legend-chip">✂️ Κόψε-κόλλησε <b>×3</b></div>
+  <div class="legend-chip">🔢 Sequence cards <b>×3</b></div>
+  <div class="legend-chip">😊 Κάρτες συναισθημάτων <b>×3</b></div>
+  <div class="legend-chip">🎲 Επιτραπέζιο <b>×4</b></div>
+  <div class="legend-chip new-type">🔎 Hidden objects <b>×5</b></div>
+  <div class="legend-chip new-type">😐 Spot-the-emotion <b>×4</b></div>
+  <div class="legend-chip new-type">🃏 Memory <b>×4</b></div>
+  <div class="legend-chip new-type">✋ Mini χειροτεχνία <b>×2</b></div>
+</div>
+
+<div class="biscuit-explainer">
+  🐾 <strong>Αποστολές του Μπισκότου</strong> — μία μικρή, πραγματική πρόκληση ζωής στο τέλος <em>κάθε</em> από τα 19 κεφαλαίων (σαν μικρό κουτάκι κάτω από τη σελίδα εργαλείου, όχι ξεχωριστή σελίδα). ⭐/⭐⭐/⭐⭐⭐ = επίπεδο δυσκολίας δίπλα σε κάθε δραστηριότητα.
+</div>
+
+<table>
+  <thead>
+    <tr><th>Κεφ.</th><th>Θέμα</th><th>Κρατάμε</th><th>Νέες δραστηριότητες + Αποστολή Μπισκότου</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="ch-num">1</td><td class="ch-name">Χαρά</td>
+      <td class="kept">Body-map</td>
+      <td class="new-act">
+        <span>🎨⭐ Ζωγράφισε τον ήλιο της χαράς <em>(έτοιμο)</em></span>
+        <span>🧩⭐⭐ Ένωσε κάθε φίλο με αυτό που τον χαροποιεί</span>
+        <span class="mission">🐾 «Πες σε κάποιον κάτι που σε κάνει χαρούμενο.»</span>
+      </td>
+    </tr>
+    <tr>
+      <td class="ch-num">2</td><td class="ch-name">Λύπη</td>
+      <td class="kept">—</td>
+      <td class="new-act">
+        <span>🎨⭐ Ζωγράφισε το ουράνιο τόξο πριν/μετά</span>
+        <span>🃏⭐⭐ Memory: συναίσθημα ↔ τρόπος παρηγοριάς</span>
+        <span class="mission">🐾 «Δώσε μια αγκαλιά σε κάποιον που στεναχωρήθηκε σήμερα.»</span>
+      </td>
+    </tr>
+    <tr>
+      <td class="ch-num">3</td><td class="ch-name">Θυμός</td>
+      <td class="kept">🌡️ Θερμόμετρο έντασης</td>
+      <td class="new-act">
+        <span>🎲⭐⭐⭐ Επιτραπέζιο: «φτάσε στην ήρεμη γωνιά»</span>
+        <span>😐⭐⭐ Spot-the-emotion: βρες ποιος είναι θυμωμένος ανάμεσα σε 6 παιδιά</span>
+        <span class="mission">🐾 «Δοκίμασε την ανάσα του δράκου σήμερα όταν θυμώσεις.»</span>
+      </td>
+    </tr>
+    <tr>
+      <td class="ch-num">4</td><td class="ch-name">Φόβος</td>
+      <td class="kept">🌡️ Θερμόμετρο έντασης</td>
+      <td class="new-act">
+        <span>🔢⭐⭐ Sequence cards: βήματα προς την πισίνα σε σειρά</span>
+        <span>🧩⭐⭐ Αντιστοίχιση: φόβος → εργαλείο</span>
+        <span class="mission">🐾 «Δοκίμασε κάτι μικρό που σε φοβίζει, με τη βοήθεια κάποιου.»</span>
+      </td>
+    </tr>
+    <tr>
+      <td class="ch-num">5</td><td class="ch-name">Έκπληξη</td>
+      <td class="kept">—</td>
+      <td class="new-act">
+        <span>✂️⭐ Κόψε-κόλλησε: ευχάριστη/δυσάρεστη έκπληξη <span style="font-size:0.7rem;color:var(--ink-soft);">(αναβάθμιση sort)</span></span>
+        <span>🔎⭐⭐ Hidden objects στο πάρτι-έκπληξη</span>
+        <span class="mission">🐾 «Κάνε μια ευχάριστη έκπληξη σε κάποιον σήμερα.»</span>
+      </td>
+    </tr>
+    <tr>
+      <td class="ch-num">6</td><td class="ch-name">Ηρεμία</td>
+      <td class="kept">Ελεύθερη ζωγραφική</td>
+      <td class="new-act">
+        <span>🌸⭐ Λαβύρινθος: μέχρι την ήρεμη γωνιά</span>
+        <span>🔎⭐⭐ Hidden objects: βρες αντικείμενα ηρεμίας στο δωμάτιο</span>
+        <span class="mission">🐾 «Κάτσε 5 λεπτά στην ήρεμη γωνιά σου σήμερα, χωρίς λόγο.»</span>
+      </td>
+    </tr>
+    <tr>
+      <td class="ch-num">7</td><td class="ch-name">Παιδική χαρά θορυβώδης</td>
+      <td class="kept">🌸 Λαβύρινθος (έτοιμος)</td>
+      <td class="new-act">
+        <span>🎲⭐⭐⭐ Επιτραπέζιο: πλατφόρμα → ήσυχο παγκάκι</span>
+        <span>🎨⭐ Ζωγράφισε το ήσυχο παγκάκι</span>
+        <span class="mission">🐾 «Στο επόμενο θορυβώδες μέρος, δοκίμασε την αναπνοή του λουλουδιού.»</span>
+      </td>
+    </tr>
+    <tr>
+      <td class="ch-num">8</td><td class="ch-name">Θυμώνω πολύ</td>
+      <td class="kept">🌡️ Θερμόμετρο έντασης</td>
+      <td class="new-act">
+        <span>🔢⭐⭐ Sequence cards: εργαλεία θυμού σε σειρά δοκιμής</span>
+        <span>🔍⭐⭐ Βρες τις διαφορές: το σαλόνι πριν/μετά</span>
+        <span class="mission">🐾 «Πες σε κάποιον τι σε θύμωσε, με λόγια όχι φωνές.»</span>
+      </td>
+    </tr>
+    <tr>
+      <td class="ch-num">9</td><td class="ch-name">Στενοχωριέμαι</td>
+      <td class="kept">—</td>
+      <td class="new-act">
+        <span>🎨⭐ Ζωγράφισε τι θα παίζατε με τη Σοφία</span>
+        <span>😐⭐⭐ Spot-the-emotion: βρες ποιος είναι λυπημένος στην αυλή</span>
+        <span>🧩⭐⭐ Αντιστοίχιση: συναίσθημα → λόγια έκφρασης</span>
+        <span class="mission">🐾 «Ρώτησε έναν φίλο αν μπορείς να παίξεις μαζί του.»</span>
+      </td>
+    </tr>
+    <tr>
+      <td class="ch-num">10</td><td class="ch-name">Φοβάμαι κάτι καινούριο</td>
+      <td class="kept">🌡️ Θερμόμετρο έντασης</td>
+      <td class="new-act">
+        <span>🌸⭐⭐ Λαβύρινθος: μπες στην αίθουσα χορού</span>
+        <span>🃏⭐⭐ Memory: φόβος ↔ εργαλείο</span>
+        <span class="mission">🐾 «Δοκίμασε κάτι καινούριο σήμερα, όσο μικρό κι αν είναι.»</span>
+      </td>
+    </tr>
+    <tr>
+      <td class="ch-num">11</td><td class="ch-name">Χάνω σε παιχνίδι</td>
+      <td class="kept">✅ Sort «βοηθάει/όχι»</td>
+      <td class="new-act">
+        <span>🎲⭐⭐⭐ Επιτραπέζιο πλήρες: «Το παιχνίδι του καλού παίκτη»</span>
+        <span class="mission">🐾 «Παίξε ένα παιχνίδι και πες 'καλό παιχνίδι' ό,τι κι αν γίνει.»</span>
+      </td>
+    </tr>
+    <tr>
+      <td class="ch-num">12</td><td class="ch-name">Περιμένω τη σειρά μου</td>
+      <td class="kept">—</td>
+      <td class="new-act">
+        <span>🔍⭐⭐ Βρες τις διαφορές: η ουρά της κούνιας πριν/μετά</span>
+        <span>🔎⭐ Hidden objects: βρες πουλιά/λουλούδια όσο περιμένεις</span>
+        <span>😊⭐ Mini κάρτες παιχνιδιών αναμονής</span>
+        <span class="mission">🐾 «Την επόμενη φορά που περιμένεις, μέτρησε 3 πράγματα γύρω σου.»</span>
+      </td>
+    </tr>
+    <tr>
+      <td class="ch-num">13</td><td class="ch-name">Δεν θέλει να παίξει μαζί μου</td>
+      <td class="kept">✅ Sort «σημαίνει/δεν σημαίνει»</td>
+      <td class="new-act">
+        <span>🌸⭐⭐ Λαβύρινθος: βρες νέο φίλο</span>
+        <span>😐⭐⭐ Spot-the-emotion: βρες ποιος νιώθει μόνος</span>
+        <span class="mission">🐾 «Αν κάποιος πει 'όχι', δοκίμασε να ρωτήσεις κάποιον άλλο.»</span>
+      </td>
+    </tr>
+    <tr>
+      <td class="ch-num">14</td><td class="ch-name">Δοκιμάζω κάτι καινούριο</td>
+      <td class="kept">—</td>
+      <td class="new-act">
+        <span>🎨⭐ Ζωγράφισε το ποδήλατο</span>
+        <span>🌸⭐⭐ Λαβύρινθος: ο δρόμος μέχρι το τέρμα</span>
+        <span>🔎⭐⭐ Hidden objects: βρες τις πινακίδες στον δρόμο</span>
+        <span class="mission">🐾 «Πες 'δεν μπορώ ΑΚΟΜΑ' την επόμενη φορά που δυσκολευτείς.»</span>
+      </td>
+    </tr>
+    <tr>
+      <td class="ch-num">15</td><td class="ch-name">Αποχωρισμός</td>
+      <td class="kept">—</td>
+      <td class="new-act">
+        <span>🔢⭐⭐ Sequence cards: τελετουργικό αποχαιρετισμού σε σειρά</span>
+        <span>🎨⭐ Ζωγράφισε το κασκόλ-ενθύμιο</span>
+        <span>😊⭐ Mini κάρτες: πριν/μετά τον αποχαιρετισμό</span>
+        <span class="mission">🐾 «Φτιάξε το δικό σου τελετουργικό αποχαιρετισμού με τη μαμά/μπαμπά.»</span>
+      </td>
+    </tr>
+    <tr>
+      <td class="ch-num">16</td><td class="ch-name">Όλα πολύ δυνατά</td>
+      <td class="kept">—</td>
+      <td class="new-act">
+        <span>🔍⭐⭐ Βρες τις διαφορές: ήσυχη γωνιά vs θορυβώδες πάρτι</span>
+        <span>🔎⭐⭐ Hidden objects: βρες τα ήρεμα αντικείμενα στη βαλιτσούλα</span>
+        <span class="mission">🐾 «Φτιάξε τη δική σου βαλιτσούλα ηρεμίας.»</span>
+      </td>
+    </tr>
+    <tr>
+      <td class="ch-num">17</td><td class="ch-name">Χρειάζομαι ησυχία</td>
+      <td class="kept">—</td>
+      <td class="new-act">
+        <span>🎨⭐ Ζωγράφισε την ήρεμη γωνιά σου στο σπίτι</span>
+        <span>✋⭐⭐⭐ Mini χειροτεχνία: pop-up κάρτα «παράθυρο ησυχίας»</span>
+        <span class="mission">🐾 «Δοκίμασε να ζητήσεις ησυχία με λόγια σήμερα.»</span>
+      </td>
+    </tr>
+    <tr>
+      <td class="ch-num">18</td><td class="ch-name">Ζητάω βοήθεια</td>
+      <td class="kept">—</td>
+      <td class="new-act">
+        <span>✂️⭐⭐ Κόψε-κόλλησε: πρόβλημα → σωστός βοηθός</span>
+        <span>🃏⭐⭐ Memory: πρόβλημα ↔ βοηθός</span>
+        <span class="mission">🐾 «Ζήτα βοήθεια σε κάτι σήμερα, ακόμα κι αν θα μπορούσες μόνος/η.»</span>
+      </td>
+    </tr>
+    <tr>
+      <td class="ch-num">19</td><td class="ch-name">Κλείσιμο</td>
+      <td class="kept">Toolbox recap grid</td>
+      <td class="new-act">
+        <span>🎲⭐⭐⭐ Επιτραπέζιο μεγάλο: «Το ταξίδι των συναισθημάτων» (recap όλων των εργαλείων)</span>
+        <span>😐⭐ Spot-the-emotion recap: όλα τα συναισθήματα μαζί</span>
+        <span class="mission">🐾 «Δίδαξε σε κάποιον ένα εργαλείο που έμαθες από αυτό το βιβλίο.»</span>
+      </td>
+    </tr>
+    <tr>
+      <td class="ch-num">Οπισθ.</td><td class="ch-name">Back matter</td>
+      <td class="kept">Δίπλωμα, κάρτες συναισθημάτων (deck), πίνακας επιβράβευσης, ημερολόγιο 30 ημερών</td>
+      <td class="new-act"><span>✋⭐⭐⭐ Mini χειροτεχνία bonus: «Ο τροχός των συναισθημάτων» (διπλός κύκλος + διπλόκαρφο)</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="totals">
+  <h2>Σύνολα (χωρίς τις 19 Αποστολές Μπισκότου, που είναι ξεχωριστή, πιο «ελαφριά» κατηγορία)</h2>
+  <div class="totals-grid">
+    <div>🎨 Ζωγραφική: <b>8</b></div>
+    <div>🔍 Βρες τις διαφορές: <b>3</b></div>
+    <div>🌸 Λαβύρινθος: <b>4</b></div>
+    <div>🧩 Αντιστοίχιση: <b>4</b></div>
+    <div>✂️ Κόψε-κόλλησε: <b>3</b></div>
+    <div>🔢 Sequence cards: <b>3</b></div>
+    <div>😊 Κάρτες συναισθημάτων: <b>3</b></div>
+    <div>🎲 Επιτραπέζιο: <b>4</b></div>
+    <div>🔎 Hidden objects: <b>5</b></div>
+    <div>😐 Spot-the-emotion: <b>4</b></div>
+    <div>🃏 Memory: <b>4</b></div>
+    <div>✋ Mini χειροτεχνία: <b>2</b></div>
+    <div style="grid-column: 1 / -1; border-top: 1px solid var(--line); margin-top: 6px; padding-top: 10px;">
+      Σύνολο νέων δραστηριοτήτων: <b>47</b> &nbsp;+&nbsp; υπάρχοντα κρατημένα (θερμόμετρα, sort, body-map, ελεύθερη ζωγραφική, toolbox recap): <b>~10</b> &nbsp;+&nbsp; 🐾 <b>19</b> Αποστολές Μπισκότου (1/κεφάλαιο, ενσωματωμένες, όχι ξεχωριστές σελίδες) &nbsp;+&nbsp; οπισθόφυλλο: <b>5</b>
+    </div>
+  </div>
+</div>
+
+<div class="note-box">
+  <strong>Γιατί λιγότερες ζωγραφικές (8 αντί για 15):</strong> Για να χωρέσουν οι νέες, πολύ ζητημένες κατηγορίες (hidden objects, spot-the-emotion, memory, mini χειροτεχνία, Αποστολές) χωρίς κάθε κεφάλαιο να φτάνει τις 12+ σελίδες, κράτησα 2-4 <em>διαφορετικές</em> δραστηριότητες ανά κεφάλαιο αντί να στοιβάξω όλους τους τύπους παντού. Το αποτέλεσμα: μεγαλύτερη <em>ποικιλία τύπων</em> συνολικά, με λογικό μέγεθος κεφαλαίου (~8-9 σελίδες).
+</div>
+<div class="note-box">
+  <strong>Επίπεδα δυσκολίας:</strong> ⭐ = πολύ απλό (ζωγραφική, hidden objects με λίγα αντικείμενα) · ⭐⭐ = μέτριο (λαβύρινθοι, αντιστοιχίσεις, memory) · ⭐⭐⭐ = πιο απαιτητικό (επιτραπέζια, πολύπλοκη χειροτεχνία). Τα πρώτα κεφάλαια (1-6, βασικά συναισθήματα) έχουν κυρίως ⭐/⭐⭐· η δυσκολία αυξάνεται σταδιακά προς τα καταστασιακά κεφάλαια, ώστε το παιδί να νιώθει πρόοδο.
+</div>
