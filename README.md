@@ -6,7 +6,7 @@
 
 - `character-bible.html` — χαρακτήρες, παλέτα, στυλ εικονογράφησης (κλειδωμένο)
 - `activity-bible.html` — χαρτογράφηση δραστηριοτήτων ανά κεφάλαιο (κλειδωμένο)
-- `illustration-bible.html` — 31 σκηνές + 39 reusable assets με πλήρη production prompts
+- `illustration-bible.html` — 32 σκηνές + 39 reusable assets με πλήρη production prompts
 - `book-manuscript-locked.html` — το κλειδωμένο κειμενικό manuscript (χωρίς εικόνες)
 - `book-final.html` / `book-final.pdf` — η τρέχουσα πλήρης έκδοση με όλες τις εικόνες + doodle decorations (144 σελίδες)
 - `scripts/` — Python pipeline για παραγωγή του illustration-bible.html (`gen_illustration_bible.py` → `bible_data.json` → `build_bible_html.py`)
@@ -17,7 +17,7 @@
 
 - Milestone 1 (Manuscript): ✅ ολοκληρωμένο
 - Milestone 2 (Illustration Bible): ✅ ολοκληρωμένο
-- Milestone 3 (Παραγωγή εικόνων): 30/31 σκηνές — εκκρεμεί I-005B (Κεφάλαιο 3, νέα) + βασική βιβλιοθήκη χαρακτήρων/doodles
+- Milestone 3 (Παραγωγή εικόνων): 30/32 σκηνές — εκκρεμούν I-005B (Κεφάλαιο 3), I-007B (Κεφάλαιο 4) + βασική βιβλιοθήκη χαρακτήρων/doodles
 - Milestone 4A (Production QA τυπογραφίας/σελιδοποίησης): σε εξέλιξη — έγιναν διορθώσεις layout (κεντράρισμα περιεχομένου, μέγεθος εικόνων), εκκρεμεί πλήρες πέρασμα σε όλες τις 144 σελίδες
 - Milestone 4B (Delight Pass): ✅ doodle stamps σε 86 σελίδες δραστηριοτήτων
 - Milestone 5 (External review): δεν έχει ξεκινήσει
